@@ -11,6 +11,23 @@ const Signup = () => {
 
 
     const fileRef = useRef();
+
+    const [avatar , setAvatar] = useState(null);
+
+
+
+    const handleSubmit = (e)=>{
+
+         e.preventDefault();
+    }
+
+
+    const handleFileInputChange = (e) =>{
+
+
+              const file = e.target.files[0];
+              setAvatar(file);
+    } 
  
  
    return (
@@ -20,12 +37,14 @@ const Signup = () => {
  
           <div className='bg-white shadow p-5 max-w-sm mx-auto rounded flex-1'>
           <h1 className='text-xl text-center my-3 font-bold '>Register as a new user</h1>
-            <form className='flex flex-col gap-4 my-5 p-3'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-4 my-5 p-3'>
 
-              <div className='flex gap-2 mx-auto  p-2'>
-              <FaRegUserCircle  className='text-4xl'/>
-              <input type='file'  ref={fileRef} accept='.jpg,.jpeg,.png'  className='hidden'/>
-              <button onClick={()=>fileRef.current.click()}   type='button' className='border p-2 rounded'>Upload Image </button>
+              <div className='flex items-center gap-2 mx-auto  p-2'>
+
+              {avatar ?   <img src={URL.createObjectURL(avatar)} className='w-10 h-10 rounded-full object-cover' alt='profile image' /> :  <FaRegUserCircle  className='w-10 h-10'/> }
+             
+              <input type='file'  ref={fileRef} accept='.jpg,.jpeg,.png'  onChange={handleFileInputChange} className='hidden'/>
+              <button onClick={()=>fileRef.current.click()}   type='button' className='border p-2 rounded text-gray-500'>Upload Image </button>
 
               </div>
 
