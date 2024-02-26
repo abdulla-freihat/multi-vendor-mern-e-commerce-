@@ -29,7 +29,7 @@ password:{
 
       type:String,
       required: [true, "Please enter your password!"],
-      minlength: [8, "Password should be greater than 8 characters"],
+   
       select: false,
 },
 

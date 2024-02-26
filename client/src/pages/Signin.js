@@ -1,6 +1,10 @@
 import React , {useState} from 'react'
 import { Link } from 'react-router-dom'
 import { FaRegEyeSlash , FaRegEye  } from "react-icons/fa6";
+import axios from "axios";
+import { server } from "../server";
+import { useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast';
 
 
 const Signin = () => {
@@ -10,6 +14,47 @@ const Signin = () => {
    const[password , setPassword] = useState('');
 
 
+
+   const navigate = useNavigate();
+
+
+
+   const handleSubmit = (e) => {
+    e.preventDefault();
+
+
+    axios
+      .post(`${server}/auth/signin` ,{
+
+               email ,
+               password,
+      })
+      .then((res) => {
+        
+          if(res.data.success === true){
+                 toast.success(res.data.message);
+            setTimeout(()=>{
+              navigate('/');
+            } , 2000)
+               
+
+                setEmail('')
+                setPassword('');
+              
+          }
+      })
+      .catch((err) => {
+        if (err.response && err.response.data && err.response.data.error) {
+     
+          toast.error(err.response.data.error);
+      } else {
+          
+          toast.error("An error occurred");
+      }
+      });
+  };
+
+
   return (
     <div className='bg-gray-50 flex  items-center min-h-screen p-2'>
 
@@ -17,7 +62,7 @@ const Signin = () => {
 
          <div className='bg-white shadow p-5 max-w-sm mx-auto rounded flex-1'>
          <h1 className='text-xl text-center my-3 font-bold '>Login to your account</h1>
-           <form className='flex flex-col gap-4 my-5 p-3'>
+           <form onSubmit={handleSubmit} className='flex flex-col gap-4 my-5 p-3'>
               <div className='flex flex-col gap-1'>
                 <label htmlFor='email' className='text-gray-500 text-sm '>Email address</label>
                 <input type='email' name='email' id='email' className='outline-none border rounded p-1'  value={email}  onChange={(e)=>setEmail(e.target.value)} />
