@@ -41,8 +41,9 @@ const Signup = () => {
     axios
       .post(`${server}/auth/signup`, newForm, config)
       .then((res) => {
+        
           if(res.data.success === true){
-                 toast.success('sign up successfully');
+                 toast.success(res.data.message);
             setTimeout(()=>{
               navigate('/sign-in');
             } , 2000)
@@ -55,7 +56,13 @@ const Signup = () => {
           }
       })
       .catch((err) => {
-        console.log(err);
+        if (err.response && err.response.data && err.response.data.error) {
+          // Display the specific error message received from the backend
+          toast.error(err.response.data.error);
+      } else {
+          // If no specific error message received, display a generic error
+          toast.error("An error occurred");
+      }
       });
   };
 

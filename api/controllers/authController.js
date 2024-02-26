@@ -6,9 +6,35 @@ const errorHandler = require("../utils/errorHandler");
 const path = require("path");
 const fs = require("fs");
 
+
+
+const createToken = (_id)=>{
+
+     return  jwt.sign({_id } ,  process.env.JWT_SECRET , {expiresIn : '1d'});
+     
+}
+
+
+
 const signup = async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
+
+       
+         if(!username || !email || !password){
+
+          throw new errorHandler("All fields must be filled", 400);
+
+
+
+         }    
+
+
+           // Validate password complexity
+        const passwordRegex = /^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{6,}$/;
+        if (!passwordRegex.test(password)) {
+            throw new errorHandler("Password must be at least 6 characters long and contain at least one uppercase letter and one number", 400);
+        }
 
     const userEmail = await userSchema.findOne({ email });
 
@@ -25,7 +51,8 @@ const signup = async (req, res, next) => {
         }
       });
 
-      return next(new errorHandler("User already exists.", 400));
+      throw new errorHandler("User already exists.", 400);
+
     }
 
     // Get the filename from the request file object
@@ -36,6 +63,8 @@ const signup = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
+    
+
     const user = new userSchema({
       username: username,
       email: email,
@@ -44,10 +73,15 @@ const signup = async (req, res, next) => {
     });
 
     const newUser = await user.save();
+ 
 
-    return res.status(201).json({ success: true, newUser });
+       //create token 
+
+        const token = createToken(newUser._id)
+       
+    return res.status(201).json({ success: true, message:'sign up successfully' , token});
   } catch (err) {
-    return next(new errorHandler(err.message, 400));
+    return next(err);
   }
 };
 

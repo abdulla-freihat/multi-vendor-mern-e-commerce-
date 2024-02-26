@@ -30,6 +30,19 @@ app.use(cors());
 
 app.use("/api/auth", authRoutes);
 
+
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+
+  res.status(statusCode).json({
+      success: false,
+      error: message,
+  });
+});
+
 app.listen(process.env.PORT, () => {
   console.log("server is running on port " + process.env.PORT);
 });
