@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from './redux/userSlice';
 import { server } from './server';
+import Header from './components/Header';
 
 import axios from 'axios';
 
@@ -55,6 +56,7 @@ function App() {
     <BrowserRouter>
 
 <Toaster />
+<Header />
         <Routes>
         <Route path='/' element={<Home />}></Route>
             <Route path='/sign-in' element={<Signin />}></Route>
