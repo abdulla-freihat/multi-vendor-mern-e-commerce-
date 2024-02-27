@@ -5,6 +5,9 @@ import axios from "axios";
 import { server } from "../server";
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
+import {signIn} from '../redux/userSlice';
+import {useDispatch, useSelector} from 'react-redux';
+
 
 
 const Signin = () => {
@@ -16,6 +19,9 @@ const Signin = () => {
 
 
    const navigate = useNavigate();
+   const dispatch = useDispatch();
+   const {currentUser} = useSelector(state =>state.user);
+ 
 
 
 
@@ -32,6 +38,7 @@ const Signin = () => {
       .then((res) => {
         
           if(res.data.success === true){
+            dispatch(signIn({user:res.data.user , token:res.data.token}));
                  toast.success(res.data.message);
             setTimeout(()=>{
               navigate('/');
@@ -55,6 +62,9 @@ const Signin = () => {
   };
 
 
+
+
+
   return (
     <div className='bg-gray-50 flex  items-center min-h-screen p-2'>
 
@@ -66,6 +76,7 @@ const Signin = () => {
               <div className='flex flex-col gap-1'>
                 <label htmlFor='email' className='text-gray-500 text-sm '>Email address</label>
                 <input type='email' name='email' id='email' className='outline-none border rounded p-1'  value={email}  onChange={(e)=>setEmail(e.target.value)} />
+               
               </div>
 
 

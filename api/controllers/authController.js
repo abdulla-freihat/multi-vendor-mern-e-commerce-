@@ -7,7 +7,7 @@ const path = require("path");
 const fs = require("fs");
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "10m" });
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "5m" });
 };
 
 const signup = async (req, res, next) => {
@@ -106,7 +106,7 @@ const signin = async (req, res, next) => {
 
     return res
     .status(201)
-    .json({ success: true, message: "sign in successfully", token });
+    .json({ success: true, message: "sign in successfully", token ,user });
 
       
 
@@ -116,7 +116,15 @@ const signin = async (req, res, next) => {
   }
 };
 
+
+const checkToken = async(req, res,next)=>{
+
+   // If the middleware verifyToken passes, it means the token is valid and not expired
+  res.status(200).json({ message: 'Token is valid.' });
+}
+
 module.exports = {
   signup,
   signin,
+  checkToken
 };
