@@ -53,7 +53,7 @@ const Header = () => {
 
   return (
     <header className="bg-white  w-full">
-      <nav className=" bg-gray-100 flex items-center justify-between p-3 lg:px-8 border-b sticky top-0 ">
+      <nav className=" bg-gray-100 flex items-center justify-between p-3 lg:px-8 border-b  ">
         <Link to="/" className="text-3xl font-bold text-orange-400">
           Shop
         </Link>
@@ -69,7 +69,7 @@ const Header = () => {
           <FaSearch />
 
           {searchData && searchData.length !== 0 ? (
-            <div className="absolute top-14 min-h-[30vh]  md:w-[400px] lg:w-[400px] bg-slate-50 shadow-sm-2 z-[9] p-1 flex flex-col gap-2">
+            <div className="absolute top-14 min-h-[30vh]  md:w-[400px] lg:w-[400px] bg-slate-50 shadow-sm-2 z-100 p-1 flex flex-col gap-2">
               {searchData &&
                 searchData.map((i, index) => {
                   return (

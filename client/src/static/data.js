@@ -207,13 +207,13 @@
       title: "Gifts",
       subTitle: "",
       image_Url:
-        "https://securecdn.pymnts.com/wp-content/uploads/2014/11/Gifts-Photo-700x489.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJP4ITLk1mCNfwXQmJkrGsPPt-Yo05JDn1-A&usqp=CAU",
     },
     {
       id: 7,
       title: "Pet Care",
       subTitle: "",
-      image_Url: "https://cdn.openpr.com/T/c/Tc15444071_g.jpg",
+      image_Url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEP3fgJAsdaZnCsNmS7XHT4lQs1FYXb2C9FBa8eAS9jw_PfRfmBpbQugQA7UvxY9Hvats&usqp=CAU",
     },
     {
       id: 8,
