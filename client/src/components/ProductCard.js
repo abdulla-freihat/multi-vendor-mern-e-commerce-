@@ -6,14 +6,14 @@ import ProductModal from "./ProductModal";
 
 
 const ProductCard = ({ product }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const open = () => {
-    setIsOpen(true);
+  const openProductModal = () => {
+    setIsOpenModal(true);
   };
 
-  const close = () => {
-    setIsOpen(false);
+  const closeProductModal = () => {
+    setIsOpenModal(false);
   };
 
   return (
@@ -32,7 +32,7 @@ const ProductCard = ({ product }) => {
           <BsCartPlus className="w-6 h-6 hover:text-orange-400 cursor-pointer " />
           <FaRegEye
             className="w-6 h-6 hover:text-orange-400 cursor-pointer"
-            onClick={open}
+            onClick={openProductModal}
           />
         </div>
       </div>
@@ -64,9 +64,9 @@ const ProductCard = ({ product }) => {
  
     </div>
 
-     {isOpen && (
+     {isOpenModal && (
     
-           <ProductModal close={close} product={product} />
+           <ProductModal closeProductModal={closeProductModal} product={product} />
        )}
 
 </>

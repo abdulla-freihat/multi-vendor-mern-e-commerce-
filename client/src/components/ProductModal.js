@@ -2,11 +2,11 @@ import React from 'react'
 import { FaTimes } from "react-icons/fa";
 import { BsCartPlus } from "react-icons/bs";
 
-const ProductModal = ({close , product}) => {
+const ProductModal = ({closeProductModal , product}) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 p-2"  >
     <div className="relative bg-white p-6 rounded-md max-w-xl">
-    <FaTimes className="absolute top-2 right-2 w-6 h-6 text-orange-400 hover:text-orange-500 cursor-pointer"  onClick={close} />
+    <FaTimes className="absolute top-2 right-2 w-6 h-6 text-orange-400 hover:text-orange-500 cursor-pointer"  onClick={closeProductModal} />
     <div className="flex flex-col md:flex-row  items-center md:items-start gap-5">
 
         <div className="flex-1">
