@@ -2,6 +2,8 @@ import React from 'react'
 import { FaTimes } from "react-icons/fa";
 import { BsCartPlus } from "react-icons/bs";
 
+
+
 const ProductModal = ({closeProductModal , product}) => {
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 p-2"  >

@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { BsCartPlus } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa6";
 import ProductModal from "./ProductModal";
+import ProductsCart from "./ProductsCart";
 
 
 const ProductCard = ({ product }) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [isOpenCart, setIsOpenCart] = useState(false);
 
   const openProductModal = () => {
     setIsOpenModal(true);
@@ -14,6 +16,15 @@ const ProductCard = ({ product }) => {
 
   const closeProductModal = () => {
     setIsOpenModal(false);
+  };
+
+
+  const openProductsCart = () => {
+    setIsOpenCart(true);
+  };
+
+  const closeProductsCart = () => {
+    setIsOpenCart(false);
   };
 
   return (
@@ -29,7 +40,7 @@ const ProductCard = ({ product }) => {
           />
         </Link>
         <div className="flex flex-col gap-2">
-          <BsCartPlus className="w-6 h-6 hover:text-orange-400 cursor-pointer " />
+          <BsCartPlus onClick={openProductsCart} className="w-6 h-6 hover:text-orange-400 cursor-pointer " />
           <FaRegEye
             className="w-6 h-6 hover:text-orange-400 cursor-pointer"
             onClick={openProductModal}
@@ -67,6 +78,12 @@ const ProductCard = ({ product }) => {
      {isOpenModal && (
     
            <ProductModal closeProductModal={closeProductModal} product={product} />
+       )}
+
+
+       {isOpenCart && (
+
+           <ProductsCart closeProductsCart={closeProductsCart}  />
        )}
 
 </>
