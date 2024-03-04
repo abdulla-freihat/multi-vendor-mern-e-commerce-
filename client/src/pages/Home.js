@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import { Link } from "react-router-dom";
 
 import Categories from "../components/Categories";
+import BestDeals from "../components/BestDeals";
 
 const Home = () => {
   return (
@@ -37,6 +38,10 @@ const Home = () => {
     </div>
       <div className="p-2">
       <Categories />
+      </div>
+
+      <div className="p-2">
+        <BestDeals />
       </div>
 
 

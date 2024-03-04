@@ -249,7 +249,7 @@
       image_Url: [
         {
           public_id: "test",
-          url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+          url: "https://www.portableone.com/Shared/images/133mbpro.jpg",
         },
         {
           public_id: "test",
@@ -309,7 +309,7 @@
       image_Url: [
         {
           public_id: "test",
-          url: "https://www.istorebangladesh.com/images/thumbs/0000286_macbook-pro-m1_550.png",
+          url: "https://www.portableone.com/Shared/images/133mbpro.jpg",
         },
         {
           public_id: "test",

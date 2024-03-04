@@ -52,8 +52,8 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-white  w-full">
-      <nav className=" bg-gray-100 flex items-center justify-between p-3 lg:px-8 border-b  ">
+    <header className="bg-white  w-full ">
+      <nav className=" bg-gray-100 flex items-center justify-between p-3 lg:px-8 border-b ">
         <Link to="/" className="text-3xl font-bold text-orange-400">
           Shop
         </Link>
