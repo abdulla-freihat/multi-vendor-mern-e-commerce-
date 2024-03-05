@@ -1,9 +1,11 @@
 import React from "react";
-import Header from "../components/Header";
+
 import { Link } from "react-router-dom";
 
 import Categories from "../components/Categories";
 import BestDeals from "../components/BestDeals";
+import FeaturedProduct from "../components/FeaturedProduct";
+import Events from "../components/Events";
 
 const Home = () => {
   return (
@@ -39,7 +41,10 @@ const Home = () => {
       <div className="p-2">
       <Categories />
       <BestDeals />
+      <Events />
+      <FeaturedProduct />
       
+
       </div>
 
      
