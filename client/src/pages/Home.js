@@ -38,12 +38,11 @@ const Home = () => {
     </div>
       <div className="p-2">
       <Categories />
+      <BestDeals />
+      
       </div>
 
-      <div className="p-2">
-        <BestDeals />
-      </div>
-
+     
 
       </div>
     </>

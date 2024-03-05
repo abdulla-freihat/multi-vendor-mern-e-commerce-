@@ -30,7 +30,7 @@ const Categories = () => {
         {
             
             categoriesData && categoriesData.map((category , index)=>(
-                <Link to={`/products?category?=${category.title}`} className='hover:text-orange-400'>
+                <Link to={`/products?category=${category.title}`} className='hover:text-orange-400'>
                 <div key={index} className='flex items-center  gap-2'>
                 
                 

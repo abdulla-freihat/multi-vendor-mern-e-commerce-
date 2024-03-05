@@ -21,7 +21,7 @@ const BestDeals = () => {
 
   } , [])
   return (
-  <div className='max-w-6xl mx-auto'>
+  <div className='max-w-6xl mx-auto my-12'>
     <h3 className='font-semibold text-xl'>Best Deals</h3>
 
     <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8     '>
