@@ -1,22 +1,21 @@
-import { useEffect } from 'react';
-import {BrowserRouter , Routes , Route , Navigate} from 'react-router-dom';
-import Signin from './pages/Signin';
-import Signup from './pages/Signup';
-import toast, { Toaster } from 'react-hot-toast';
-import Home from './pages/Home';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from './redux/userSlice';
-import { server } from './server';
-import Header from './components/Header';
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Signin from "./pages/Signin";
+import Signup from "./pages/Signup";
+import toast, { Toaster } from "react-hot-toast";
+import Home from "./pages/Home";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "./redux/userSlice";
+import { server } from "./server";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
-import axios from 'axios';
+import axios from "axios";
+import ScrollTop from "./components/ScrollTop";
 
 function App() {
-
-
   const { token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     const checkTokenExpiration = async () => {
@@ -34,8 +33,7 @@ function App() {
         // If token expiration error is received, log out the user
         if (error.response && error.response.status === 401) {
           dispatch(logout());
-          Navigate('/sign-n')
-          
+          Navigate("/sign-n");
         }
       }
     };
@@ -50,18 +48,18 @@ function App() {
     return () => clearInterval(interval);
   }, [dispatch, token]);
 
-
-
   return (
     <BrowserRouter>
+      <ScrollTop />
+      <Toaster />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/sign-in" element={<Signin />}></Route>
+        <Route path="/sign-up" element={<Signup />}></Route>
+      </Routes>
 
-<Toaster />
-<Header />
-        <Routes>
-        <Route path='/' element={<Home />}></Route>
-            <Route path='/sign-in' element={<Signin />}></Route>
-            <Route path='/sign-up' element={<Signup />}></Route>
-        </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
