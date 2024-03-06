@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import EventsCountDown from "./EventsCountDown";
 
 const EventCard = () => {
   return (
@@ -9,7 +10,7 @@ const EventCard = () => {
         alt="product image"
       />
 
-      <div className=" text-center p-2 lg:text-start flex flex-col gap-3">
+      <div className=" text-center p-2 lg:text-start flex flex-col gap-6">
         <h4 className="text-2xl font-bold">Iphone 12 pro max 8/256GB</h4>
         <p className="text-gray-500 text-sm">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non
@@ -32,6 +33,9 @@ const EventCard = () => {
           </div>
           <span className="text-green-500">120 Sold</span>
         </div>
+
+
+        <EventsCountDown />
 
         <div className="flex gap-2">
           <Link className="bg-black rounded-md py-2 px-4 text-white">
