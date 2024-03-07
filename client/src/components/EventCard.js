@@ -4,7 +4,7 @@ import EventsCountDown from "./EventsCountDown";
 
 const EventCard = () => {
   return (
-    <div className="bg-white rounded-md shadow w-full  flex flex-col lg:flex-row items-center mt-3 ">
+    <div className="bg-white rounded-md shadow w-full  flex flex-col lg:flex-row items-center mt-3 border p-2 border-orange-400">
       <img
         src="https://m.media-amazon.com/images/I/31Vle5fVdaL.jpg"
         alt="product image"
