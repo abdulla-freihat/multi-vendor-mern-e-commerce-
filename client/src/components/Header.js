@@ -159,7 +159,14 @@ const Header = () => {
             </div>
             <IoCartOutline  className="w-6 h-6 cursor-pointer" />
           </div>
-          <FaRegUserCircle className="w-6 h-6" />
+
+          {currentUser ? (
+              <img src={currentUser.avatar}  alt={currentUser.username}  />
+          )
+             :
+             <FaRegUserCircle className="w-6 h-6" />
+          }
+        
           {currentUser ? (
             <h5
               className="text-sm font-semibold leading-6 cursor-pointer text-gray-900"
