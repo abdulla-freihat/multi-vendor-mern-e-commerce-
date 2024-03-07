@@ -1,4 +1,4 @@
-import React , {useState} from 'react'
+import React , {useState , useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { FaRegEyeSlash , FaRegEye  } from "react-icons/fa6";
 import axios from "axios";
@@ -23,6 +23,18 @@ const Signin = () => {
    const {currentUser} = useSelector(state =>state.user);
  
 
+   useEffect(()=>{
+
+       if(currentUser){
+            setTimeout(()=>{
+
+              navigate('/');
+            } ,2000)
+          
+        
+       }
+
+   } , [])
 
 
    const handleSubmit = (e) => {
