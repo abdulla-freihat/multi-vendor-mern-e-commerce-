@@ -9,6 +9,7 @@ import { FaSearch } from "react-icons/fa";
 import { IoIosArrowForward } from "react-icons/io";
 import { productData } from "../static/data";
 import NavbarCategories from "./NavbarCategories";
+import ProductsCart from "./ProductsCart";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -19,6 +20,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [searchData, setSearchData] = useState(null);
+  const [isOpenCart, setIsOpenCart] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -26,6 +28,15 @@ const Header = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
+  };
+
+
+  const openProductsCart = () => {
+    setIsOpenCart(true);
+  };
+
+  const closeProductsCart = () => {
+    setIsOpenCart(false);
   };
 
   const handleSearchChange = (e) => {
@@ -140,13 +151,13 @@ const Header = () => {
           </Link>
         </div>
         <div className=" flex flex-1 justify-end gap-4 items-center">
-          <div class="relative py-2">
-            <div class="top-0 absolute left-3">
+          <div class="relative py-2 cursor-pointer" onClick={openProductsCart} >
+            <div class="top-0 absolute left-3 ">
               <p class="flex h-2 w-2 items-center justify-center rounded-full bg-orange-400 p-3 text-xs text-white">
                 0
               </p>
             </div>
-            <IoCartOutline className="w-6 h-6" />
+            <IoCartOutline  className="w-6 h-6 cursor-pointer" />
           </div>
           <FaRegUserCircle className="w-6 h-6" />
           {currentUser ? (
@@ -267,6 +278,12 @@ const Header = () => {
           </div>
         </div>
       )}
+
+      {isOpenCart && (
+
+<ProductsCart closeProductsCart={closeProductsCart}  />
+)}
+
     </header>
   );
 };
