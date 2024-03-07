@@ -7,7 +7,7 @@ const NavbarCategories = () => {
 
   const handleNavigate = (event) => {
     const selectedCategory = event.target.value;
-    navigate(`/product?category=${selectedCategory}`);
+    navigate(`/products?category=${selectedCategory}`);
 
     window.location.reload();
   };
