@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef , useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -6,13 +6,15 @@ import axios from "axios";
 import { server } from "../server";
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
+import {useSelector} from 'react-redux';
+
 
 const Signup = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  const [password, setPassword] = useState(""); 
+  const {currentUser} = useSelector(state =>state.user);
   
   
 
@@ -21,6 +23,20 @@ const Signup = () => {
   const [avatar, setAvatar] = useState(null);
 
   const navigate = useNavigate();
+
+
+  useEffect(()=>{
+
+    if(currentUser){
+      
+
+           navigate('/');
+   
+       
+     
+    }
+
+} , [currentUser])
 
 
 
