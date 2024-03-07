@@ -10,6 +10,8 @@ import { server } from "./server";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ProductsPage from "./pages/ProductsPage";
+import BestSellingPage from "./pages/BestSellingPage"; 
+
 import axios from "axios";
 import ScrollTop from "./components/ScrollTop";
 
@@ -58,6 +60,7 @@ function App() {
         <Route path="/sign-in" element={<Signin />}></Route>
         <Route path="/sign-up" element={<Signup />}></Route>
         <Route path="/products" element={<ProductsPage />}></Route>
+        <Route path="/best-selling" element={<BestSellingPage />}></Route>
       </Routes>
 
       <Footer />
