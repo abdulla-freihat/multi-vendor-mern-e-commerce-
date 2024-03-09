@@ -10,6 +10,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { productData } from "../static/data";
 import NavbarCategories from "./NavbarCategories";
 import ProductsCart from "./ProductsCart";
+import { backend_url } from "../server";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -157,11 +158,11 @@ const Header = () => {
                 0
               </p>
             </div>
-            <IoCartOutline  className="w-6 h-6 cursor-pointer" />
+            <IoCartOutline  className="w-8 h-8 cursor-pointer" />
           </div>
              <Link to='/profile'>
           {currentUser ? (
-              <img src={currentUser.avatar}  alt={currentUser.username}  />
+              <img src={`${backend_url}${currentUser.avatar}`}  alt={currentUser.username}  className="rounded-full w-12 h-12 object-cover" />
           )
              :
              <FaRegUserCircle className="w-6 h-6" />

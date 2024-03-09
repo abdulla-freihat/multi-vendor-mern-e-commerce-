@@ -1,5 +1,6 @@
 import React ,{useState} from 'react'
 import { useSelector } from 'react-redux';
+import { backend_url } from '../server';
 
 
 const UserProfile = () => {
@@ -21,8 +22,8 @@ const UserProfile = () => {
   return (
     <div className='w-full'>
 
-         <div className='mx-auto rounded-full border-2 w-32 h-32 border-green-600  '>
-             <img src='https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQgByBT5IiAT_a2x9pUVb4VMoOrlzHH7Jrzj-HB5jzHlR4lNLMS' className='  rounded-full object-cover'  />
+         <div className='mx-auto rounded-full border-2 w-32 h-32 border-green-600   '>
+             <img  src={`${backend_url}${currentUser.avatar}`}  className=' w-full h-full rounded-full object-cover'  />
          </div>
          <form onSubmit={handleSubmit} className=' mt-5'>
 
