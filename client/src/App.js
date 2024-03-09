@@ -13,9 +13,12 @@ import ProductsPage from "./pages/ProductsPage";
 import BestSellingPage from "./pages/BestSellingPage"; 
 import EventsPage from "./pages/EventsPage";
 import ProductsDetailsPage from "./pages/ProductsDetailsPage";
+import ProfilePage from "./pages/ProfilePage";
 
 import axios from "axios";
 import ScrollTop from "./components/ScrollTop";
+import PrivateRoute from "./components/PrivateRoute";
+
 
 function App() {
   const { token } = useSelector((state) => state.user);
@@ -65,6 +68,9 @@ function App() {
         <Route path="/product/:name" element={<ProductsDetailsPage/>}></Route>
         <Route path="/best-selling" element={<BestSellingPage />}></Route>
         <Route path="/events" element={<EventsPage />}></Route>
+        <Route    element={<PrivateRoute/>} >
+        <Route path="/profile" element={<ProfilePage />}></Route>
+        </Route>
       </Routes>
 
       <Footer />

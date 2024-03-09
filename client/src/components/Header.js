@@ -159,13 +159,15 @@ const Header = () => {
             </div>
             <IoCartOutline  className="w-6 h-6 cursor-pointer" />
           </div>
-
+             <Link to='/profile'>
           {currentUser ? (
               <img src={currentUser.avatar}  alt={currentUser.username}  />
           )
              :
              <FaRegUserCircle className="w-6 h-6" />
           }
+
+          </Link>
         
           {currentUser ? (
             <h5
