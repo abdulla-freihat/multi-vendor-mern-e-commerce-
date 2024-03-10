@@ -14,6 +14,7 @@ import BestSellingPage from "./pages/BestSellingPage";
 import EventsPage from "./pages/EventsPage";
 import ProductsDetailsPage from "./pages/ProductsDetailsPage";
 import ProfilePage from "./pages/ProfilePage";
+import SellerCreatePage from "./pages/SellerCreatePage";
 
 import axios from "axios";
 import ScrollTop from "./components/ScrollTop";
@@ -68,6 +69,8 @@ function App() {
         <Route path="/product/:name" element={<ProductsDetailsPage/>}></Route>
         <Route path="/best-selling" element={<BestSellingPage />}></Route>
         <Route path="/events" element={<EventsPage />}></Route>
+        <Route path="/shop-create" element={<SellerCreatePage />}></Route>
+
         <Route    element={<PrivateRoute/>} >
         <Route path="/profile" element={<ProfilePage />}></Route>
         </Route>

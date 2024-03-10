@@ -105,7 +105,7 @@ const Header = () => {
         </div>
 
         <Link
-          to="/seller"
+          to="/shop-create"
           className="hidden md:flex bg-black items-center gap-1 text-white p-2 rounded-md"
         >
           <span>Become Seller</span>
@@ -277,8 +277,9 @@ const Header = () => {
                   </div>
 
                   <Link
-                    to="/seller"
+                    to="/shop-create"
                     className=" w-[140px] bg-black flex  items-center gap-1 text-white  p-2 rounded-md"
+                    onClick={closeMenu}
                   >
                     Become Seller <IoIosArrowForward />
                   </Link>
