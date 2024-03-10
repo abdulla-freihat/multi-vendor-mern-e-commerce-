@@ -1,4 +1,6 @@
 import React , {useState , useEffect} from 'react'
+import { useLocation } from 'react-router-dom';
+
 import ProfileSidebar from '../components/ProfileSidebar'
 import UserProfile from '../components/UserProfile';
 import UserOrders from '../components/UserOrders';
@@ -7,18 +9,19 @@ const ProfilePage = () => {
 
   
      const [tab , setTab] = useState('')
+     const location = useLocation();
 
 
      useEffect(()=>{
 
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = new URLSearchParams(location.search);
         const tabFromUrl = urlParams.get('tab') ;
         
         if(tabFromUrl){
          setTab(tabFromUrl)  
         }
         
-       } , [window.location.search])
+       } , [location.search])
 
   return (
     <div className='min-h-screen bg-gray-50 '>

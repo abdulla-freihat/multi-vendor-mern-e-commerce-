@@ -1,5 +1,5 @@
 import React ,{useState , useEffect}from 'react'
-import {Link ,  useNavigate} from 'react-router-dom'
+import {Link ,  useNavigate , useLocation} from 'react-router-dom'
 import { RxPerson } from "react-icons/rx";
 import { HiOutlineShoppingBag  , HiOutlineReceiptRefund} from "react-icons/hi";
 import { MdOutlineTrackChanges } from "react-icons/md";
@@ -19,22 +19,22 @@ const ProfileSidebar = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-
     
     const [tab , setTab] = useState('')
+    const location = useLocation();
+
 
 
     useEffect(()=>{
 
-       const urlParams = new URLSearchParams(window.location.search);
+       const urlParams = new URLSearchParams(location.search);
        const tabFromUrl = urlParams.get('tab') ;
        
        if(tabFromUrl){
         setTab(tabFromUrl)  
        }
        
-      } , [window.location.search])
+      } , [location.search])
 
 
     const handleLogout = () => {
