@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import ProfileSidebar from '../components/ProfileSidebar'
 import UserProfile from '../components/UserProfile';
 import UserOrders from '../components/UserOrders';
+import UserRefundsOrders from '../components/UserRefundsOrders';
 const ProfilePage = () => {
 
 
@@ -33,6 +34,7 @@ const ProfilePage = () => {
             
             {tab === 'profile' && <UserProfile  />}
             {tab === 'orders' && <UserOrders  />}
+            {tab === 'refunds' && <UserRefundsOrders  />}
         </div>
 
 
