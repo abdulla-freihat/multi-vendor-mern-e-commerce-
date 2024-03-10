@@ -7,6 +7,8 @@ import UserOrders from '../components/UserOrders';
 import UserRefundsOrders from '../components/UserRefundsOrders';
 import UserTrackOrders from '../components/UserTrackOrders';
 import UserPaymentMethod from '../components/UserPaymentMethod';
+import UserProfileAddress from '../components/UserProfileAddress';
+
 const ProfilePage = () => {
 
 
@@ -39,6 +41,7 @@ const ProfilePage = () => {
             {tab === 'refunds' && <UserRefundsOrders  />}
             {tab === 'trackorder' && <UserTrackOrders  />}
             {tab === 'payment' && <UserPaymentMethod  />}
+            {tab === 'address' && <UserProfileAddress  />}
         </div>
 
 
