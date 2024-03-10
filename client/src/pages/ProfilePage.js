@@ -5,6 +5,7 @@ import ProfileSidebar from '../components/ProfileSidebar'
 import UserProfile from '../components/UserProfile';
 import UserOrders from '../components/UserOrders';
 import UserRefundsOrders from '../components/UserRefundsOrders';
+import UserTrackOrders from '../components/UserTrackOrders';
 const ProfilePage = () => {
 
 
@@ -35,6 +36,8 @@ const ProfilePage = () => {
             {tab === 'profile' && <UserProfile  />}
             {tab === 'orders' && <UserOrders  />}
             {tab === 'refunds' && <UserRefundsOrders  />}
+            {tab === 'trackorder' && <UserTrackOrders  />}
+
         </div>
 
 
