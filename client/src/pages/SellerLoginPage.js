@@ -5,7 +5,7 @@ import axios from "axios";
 import { server } from "../server";
 import { useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
-
+import { sellerLogin } from '../redux/sellerSlice';
 import {useDispatch, useSelector} from 'react-redux';
 
 
@@ -30,8 +30,36 @@ const SellerLoginPage = () => {
     e.preventDefault();
 
 
-   
+    axios
+      .post(`${server}/seller/login-shop` ,{
 
+               email ,
+               password,
+      })
+      .then((res) => {
+        
+          if(res.data.success === true){
+            dispatch(sellerLogin({seller:res.data.seller , token:res.data.token}));
+                 toast.success(res.data.message);
+            setTimeout(()=>{
+              navigate('/shop');
+            } , 2000)
+               
+
+                setEmail('')
+                setPassword('');
+              
+          }
+      })
+      .catch((err) => {
+        if (err.response && err.response.data && err.response.data.error) {
+     
+          toast.error(err.response.data.error);
+      } else {
+          
+          toast.error("An error occurred");
+      }
+      });
   };
 
 

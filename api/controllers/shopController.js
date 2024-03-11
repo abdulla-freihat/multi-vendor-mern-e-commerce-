@@ -105,7 +105,7 @@ const loginShop = async(req,res,next)=>{
 
     return res
     .status(201)
-    .json({ success: true, message: "sign in successfully", token ,user });
+    .json({ success: true, message: "sign in successfully", token ,seller });
 
    }catch(err){
      return next(err);
