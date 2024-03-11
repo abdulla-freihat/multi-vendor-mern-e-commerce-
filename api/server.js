@@ -31,7 +31,7 @@ app.use("/", express.static("uploads")); //to acces files globaly in the root
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/shop", shopRoutes);
+app.use("/api/seller", shopRoutes);
 
 
 

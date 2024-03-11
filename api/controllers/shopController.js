@@ -51,7 +51,7 @@ const createShop = async (req, res, next) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
-    const seller = new userSchema({
+    const seller = new shopSchema({
       name: name,
       email: email,
       password: hash,

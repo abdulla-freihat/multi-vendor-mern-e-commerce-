@@ -50,7 +50,7 @@ avatar:{
       required:true
 
 },
-zipcode:{
+zipCode:{
      type:Number,
      required:true
 },

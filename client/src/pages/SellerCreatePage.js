@@ -13,7 +13,7 @@ const SellerCreatePage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [shopName , setShopName] = useState('');
   const [phoneNumber , setPhoneNumber] = useState();
- const [username , setUsername] = useState('')
+
   const [email, setEmail] = useState("");
   const [address , setAddress] = useState()
   const [zipCode , setZipCode] = useState()
@@ -42,6 +42,50 @@ const SellerCreatePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+
+    const config = { headers: { "Content-Type": "multipart/form-data " } };
+
+    const newForm = new FormData();
+
+    newForm.append("file", avatar);
+    newForm.append("name", shopName);
+    newForm.append("email", email);
+    newForm.append("password", password);
+    newForm.append("address", address);
+    newForm.append("zipCode" , zipCode);
+    newForm.append("phoneNumber" , phoneNumber);
+
+
+    axios
+      .post(`${server}/seller/create-shop`, newForm, config)
+      .then((res) => {
+        
+          if(res.data.success === true){
+                 toast.success(res.data.message);
+            setTimeout(()=>{
+              navigate('/shop-login');
+            } , 2000)
+               
+
+                setShopName('');
+                setEmail('');
+                setPassword('');
+                setZipCode('');
+                setAddress('');
+                setPhoneNumber('')
+                setAvatar(null);
+          }
+      })
+      .catch((err) => {
+        if (err.response && err.response.data && err.response.data.error) {
+          // Display the specific error message received from the backend
+          toast.error(err.response.data.error);
+      } else {
+          // If no specific error message received, display a generic error
+          toast.error("An error occurred");
+      }
+      });
 
    
   };
