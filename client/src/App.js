@@ -16,10 +16,12 @@ import ProductsDetailsPage from "./pages/ProductsDetailsPage";
 import ProfilePage from "./pages/ProfilePage";
 import SellerCreatePage from "./pages/SellerCreatePage";
 import SellerLoginPage from "./pages/SellerLoginPage";
+import ShopHomePage from "./pages/ShopHomePage";
 
 import axios from "axios";
 import ScrollTop from "./components/ScrollTop";
 import PrivateRoute from "./components/PrivateRoute";
+import SellerPrivateRoute from "./components/SellerPrivateRoute"
 
 
 function App() {
@@ -72,6 +74,12 @@ function App() {
         <Route path="/events" element={<EventsPage />}></Route>
         <Route path="/shop-create" element={<SellerCreatePage />}></Route>
         <Route path="/shop-login" element={<SellerLoginPage />}></Route>
+
+        <Route element={<SellerPrivateRoute />}>
+        <Route path="/shop/:id" element={<ShopHomePage />}></Route>
+
+        </Route>
+
 
 
         <Route    element={<PrivateRoute/>} >

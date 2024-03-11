@@ -20,7 +20,7 @@ const SellerLoginPage = () => {
 
    const navigate = useNavigate();
    const dispatch = useDispatch();
-   const {currentUser} = useSelector(state =>state.user);
+   const {seller} = useSelector(state =>state.seller);
  
 
    
@@ -42,7 +42,7 @@ const SellerLoginPage = () => {
             dispatch(sellerLogin({seller:res.data.seller , token:res.data.token}));
                  toast.success(res.data.message);
             setTimeout(()=>{
-              navigate('/shop');
+              navigate(`/shop/${seller._id}`);
             } , 2000)
                
 
