@@ -9,6 +9,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
+const shopRoutes = require("./routes/shopRoutes");
+
 
 const db = process.env.MONGO_URL;
 
@@ -29,6 +31,8 @@ app.use("/", express.static("uploads")); //to acces files globaly in the root
 app.use(cors());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/shop", shopRoutes);
+
 
 
 
