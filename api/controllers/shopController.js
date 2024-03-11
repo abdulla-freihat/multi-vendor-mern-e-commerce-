@@ -75,6 +75,44 @@ const createShop = async (req, res, next) => {
   }
 };
 
+
+const loginShop = async(req,res,next)=>{
+
+   try{
+
+    const {email , password} = req.body;
+
+    if (!email || !password) {
+      throw new errorHandler("All fields must be filled", 400);
+    }
+
+    const seller = await shopSchema.findOne({ email }).select('+password');
+
+    
+    if (!seller) {
+      throw new errorHandler("No user found. please sign up", 400);
+    }
+
+     // Compare the provided password with the hashed password from the user object
+     const validPassowrd = await bcrypt.compare(password, seller.password);
+
+
+     if (!validPassowrd) {
+      throw new errorHandler("Invalid password.try again", 400);
+    }
+    
+    const token = createToken(seller._id);
+
+    return res
+    .status(201)
+    .json({ success: true, message: "sign in successfully", token ,user });
+
+   }catch(err){
+     return next(err);
+   }
+}
+
 module.exports = {
   createShop,
+  loginShop
 };
