@@ -93,7 +93,7 @@ const SellerCreatePage = () => {
   return (
 
     <div className="min-h-screen">
-    <div className="bg-gray-50 flex  items-center p-2">
+    <div className="bg-gray-50 flex  items-center p-2 min-h-screen">
       <div className="bg-white shadow p-5 max-w-lg mx-auto rounded flex-1">
         <h1 className="text-xl text-center my-3 font-bold ">
           Register as a seller
