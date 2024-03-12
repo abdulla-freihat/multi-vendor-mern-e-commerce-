@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom'
 
 const PrivateRoute = () => {
     const {seller} = useSelector(state=>state.seller);
-  return  seller ? <Outlet /> : <Navigate  to='/'  /> 
+  return  seller ? <Outlet /> : <Navigate  to='/shop-login'  /> 
   
 }
 

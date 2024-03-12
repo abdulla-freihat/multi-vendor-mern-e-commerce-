@@ -24,7 +24,15 @@ const SellerLoginPage = () => {
  
 
    
+useEffect(()=>{
+if(seller){
+   setTimeout(()=>{
+    navigate('/dashboard')
 
+  } ,2000)
+}
+
+},[seller])
 
    const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,10 +49,7 @@ const SellerLoginPage = () => {
           if(res.data.success === true){
             dispatch(sellerLogin({seller:res.data.seller , token:res.data.token}));
                  toast.success(res.data.message);
-            setTimeout(()=>{
-              navigate(`/shop/${seller._id}`);
-            } , 2000)
-               
+         
 
                 setEmail('')
                 setPassword('');

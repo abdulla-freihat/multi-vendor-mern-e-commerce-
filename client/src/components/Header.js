@@ -14,6 +14,8 @@ import { backend_url } from "../server";
 
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
+  const { seller } = useSelector((state) => state.seller);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -105,7 +107,8 @@ const Header = () => {
         </div>
 
         <Link
-          to="/shop-create"
+          to={seller ? `/shop/${seller._id}`  : `/shop-login` }
+
           className="hidden md:flex bg-black items-center gap-1 text-white p-2 rounded-md"
         >
           <span>Become Seller</span>
@@ -277,7 +280,7 @@ const Header = () => {
                   </div>
 
                   <Link
-                    to="/shop-create"
+                      to={seller ? `/shop/${seller._id}`  : `/shop-login` }
                     className=" w-[140px] bg-black flex  items-center gap-1 text-white  p-2 rounded-md"
                     onClick={closeMenu}
                   >

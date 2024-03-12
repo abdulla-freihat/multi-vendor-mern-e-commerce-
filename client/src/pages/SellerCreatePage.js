@@ -18,8 +18,8 @@ const SellerCreatePage = () => {
   const [address , setAddress] = useState()
   const [zipCode , setZipCode] = useState()
   const [password, setPassword] = useState(""); 
-  const {currentUser} = useSelector(state =>state.user);
-  
+  const {seller} = useSelector(state =>state.seller);
+
   
 
   const fileRef = useRef();
@@ -29,7 +29,18 @@ const SellerCreatePage = () => {
   const navigate = useNavigate();
 
 
+ 
+
+   
+  useEffect(()=>{
+  if(seller){
+     setTimeout(()=>{
+      navigate('/dashboard')
   
+    } ,2000)
+  }
+  
+  },[seller])
 
 
 
