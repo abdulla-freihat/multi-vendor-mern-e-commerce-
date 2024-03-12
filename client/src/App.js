@@ -17,11 +17,13 @@ import ProfilePage from "./pages/ProfilePage";
 import SellerCreatePage from "./pages/SellerCreatePage";
 import SellerLoginPage from "./pages/SellerLoginPage";
 import ShopHomePage from "./pages/ShopHomePage";
+import SellerShopDashboardPage from "./pages/SellerShopDashboardPage";
 
 import axios from "axios";
 import ScrollTop from "./components/ScrollTop";
 import PrivateRoute from "./components/PrivateRoute";
 import SellerPrivateRoute from "./components/SellerPrivateRoute"
+import MaybeShowNavbar from "./components/MaybeShowNavbar";
 
 
 function App() {
@@ -63,7 +65,11 @@ function App() {
     <BrowserRouter>
       <ScrollTop />
       <Toaster />
+
+      <MaybeShowNavbar>
       <Header />
+      </MaybeShowNavbar>
+    
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/sign-in" element={<Signin />}></Route>
@@ -77,6 +83,8 @@ function App() {
 
         <Route element={<SellerPrivateRoute />}>
         <Route path="/shop/:id" element={<ShopHomePage />}></Route>
+        <Route path="/dashboard" element={<SellerShopDashboardPage />}></Route>
+
 
         </Route>
 
@@ -87,8 +95,14 @@ function App() {
         </Route>
       </Routes>
 
+      
+      <MaybeShowNavbar>
       <Footer />
+      </MaybeShowNavbar>
+     
     </BrowserRouter>
+
+    
   );
 }
 
