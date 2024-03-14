@@ -31,7 +31,7 @@ const ProfilePage = () => {
   return (
     <div className='min-h-screen bg-gray-50 '>
 
-        <div className='flex gap-8 max-w-6xl mx-auto p-3 flex-col md:flex-row '>
+        <div className='flex gap-8 max-w-8xl mx-auto p-3 flex-col md:flex-row '>
         <div className='w-full md:w-[300px]'>
             <ProfileSidebar />
         </div>
