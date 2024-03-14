@@ -18,21 +18,21 @@ const SellerShopDashboardHeader = () => {
         <div className="flex items-center ">
           <div className="flex items-center gap-4">
             <Link
-              to="/dashboard-events"
+              to="/dashboard?tab=events"
               className="cursor-pointer text-[#555] hover:text-orange-400"
             >
               <MdOutlineLocalOffer size={25} />
             </Link>
 
             <Link
-              to="/dashboard-products"
+              to="/dashboard?tab=products"
               className="cursor-pointer text-[#555] hover:text-orange-400"
             >
               <FiShoppingBag size={25} />
             </Link>
 
             <Link
-              to="/dashboard-orders"
+              to="/dashboard?tab=orders"
               className="cursor-pointer text-[#555] hover:text-orange-400"
             >
               <FiPackage size={25} />
