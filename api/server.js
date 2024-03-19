@@ -10,6 +10,7 @@ const cors = require("cors");
 
 const authRoutes = require("./routes/authRoutes");
 const shopRoutes = require("./routes/shopRoutes");
+const productRoutes=require("./routes/productRoutes")
 
 
 const db = process.env.MONGO_URL;
@@ -32,6 +33,7 @@ app.use(cors());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/seller", shopRoutes);
+app.use("/api/product", productRoutes);
 
 
 
