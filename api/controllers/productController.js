@@ -41,8 +41,27 @@ const createProduct = async (req, res , next)=>{
 }
 
 
+
+// get all products of the shop
+const getAllProducts = async (req, res,next)=>{
+
+     try{
+
+        const products = await productSchema.find({shopId:req.params.id});
+
+        return res
+        .status(201)
+        .json({ success: true, products });
+
+     }catch(err){
+
+         return next(err)
+     }
+}
+
 module.exports={
-       createProduct
+       createProduct,
+       getAllProducts
 }
 
 
