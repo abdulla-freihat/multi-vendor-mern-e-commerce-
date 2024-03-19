@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {categoriesData} from "../../static/data"
+import {categoriesData} from "../../static/data";
+import {productCreate} from '../../redux/productSlice'
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import {server} from '../../server'
+
 
 const SellerShopDashboardCreateProduct = () => {
   const { seller } = useSelector((state) => state.seller);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [images, setImages] = useState([]);
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
@@ -24,10 +30,66 @@ const SellerShopDashboardCreateProduct = () => {
      setImages((prevImages => [...prevImages , ...files]))
   }
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-     e.preventDeafult();
-  }
+
+    const config = { headers: { "Content-Type": "multipart/form-data " } };
+
+    const newForm = new FormData();
+
+    images.forEach((image)=>{
+
+      newForm.append("images", image);
+
+    })
+    newForm.append("name", name);
+    newForm.append("category", category);
+    newForm.append("description", description);
+    newForm.append("tags", tags);
+    newForm.append("originalPrice" , originalPrice);
+    newForm.append("discountPrice" , discountPrice);
+    newForm.append("stock" , stock);
+    newForm.append("shopId" , seller._id);
+
+
+
+
+    axios
+      .post(`${server}/product/create-product`, newForm, config)
+      .then((res) => {
+        
+          if(res.data.success === true){
+            dispatch(productCreate(res.data.product));
+
+                 toast.success(res.data.message);
+            setTimeout(()=>{
+              navigate('/dashboard?tab=dashboard');
+            } , 2000)
+               
+
+                setName('');
+                setCategory('');
+                setDescription('');
+                setTags('');
+                setOriginalPrice('');
+                setDiscountPrice('')
+                setStock('');
+                setImages([])
+          }
+      })
+      .catch((err) => {
+        if (err.response && err.response.data && err.response.data.error) {
+          // Display the specific error message received from the backend
+          toast.error(err.response.data.error);
+      } else {
+          // If no specific error message received, display a generic error
+          toast.error("An error occurred");
+      }
+      });
+
+   
+  };
   return (
     <div className=" w-full lg:w-[60%] bg-white rounded-md shadow  p-5 h-[90vh] overflow-y-scroll">
       <h5 className="font-bold text-xl text-center">Create Products</h5>
@@ -54,11 +116,12 @@ const SellerShopDashboardCreateProduct = () => {
             Description <span className="text-red-600">*</span>
           </label>
 
-          <input
-            type="text"
+          <textarea
+            rows={6}
+            required
             value={description}
             name='description'
-            className="outline-none border border-gray-300 placeholder-gray-400 p-1"
+            className="outline-none border border-gray-300 placeholder-gray-400 p-1 resize-none"
             placeholder="Enter your product description..."
             onChange={(e) => setDescription(e.target.value)}
           />
