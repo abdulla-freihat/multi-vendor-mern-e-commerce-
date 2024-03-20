@@ -9,7 +9,7 @@ const verifyToken = require('../utils/verifyToken');
 const router = express.Router();
 
 //create seller dashboard shop products route
-router.post('/create-product'  , upload.array("images"),createProduct)
+router.post('/create-product'  , verifyToken, upload.array("images"),createProduct)
 //get all seller dashboard shop products
 router.get('/all-products/:id' , getAllProductsShop )
 //delte seller dashboard shop products

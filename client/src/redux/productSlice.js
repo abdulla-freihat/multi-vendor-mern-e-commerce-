@@ -16,10 +16,16 @@ const productSlice = createSlice({
     getAllProductsShop: (state, action) => {
       state.products = action.payload;
     },
+
+    deleteProductsShop:(state,action)=>{
+
+      state.products = state.products.filter((product)=> product._id !== action.payload)
+
+    }
   }
 
  
 });
 
-export const { productCreate, getAllProductsShop } = productSlice.actions;
+export const { productCreate, getAllProductsShop , deleteProductsShop } = productSlice.actions;
 export default productSlice.reducer;

@@ -9,7 +9,7 @@ import {server} from '../../server'
 
 
 const SellerShopDashboardCreateProduct = () => {
-  const { seller } = useSelector((state) => state.seller);
+  const { seller , token } = useSelector((state) => state.seller);
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [images, setImages] = useState([]);
@@ -34,7 +34,7 @@ const SellerShopDashboardCreateProduct = () => {
     e.preventDefault();
 
 
-    const config = { headers: { "Content-Type": "multipart/form-data " } };
+    const config = { headers: { "Content-Type": "multipart/form-data " ,  Authorization: `Bearer ${token}` }};
 
     const newForm = new FormData();
 

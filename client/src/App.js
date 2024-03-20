@@ -69,8 +69,11 @@ function App() {
 
 
   useEffect(() => {
-    axios
-      .get(`${server}/product/all-products/${seller._id}`)
+    if(seller){
+
+
+      axios
+      .get(`${server}/product/all-products/${seller._id}` ,)
       .then((res) => {
         if (res.data.success === true) {
           dispatch(getAllProductsShop(res.data.products));
@@ -79,7 +82,9 @@ function App() {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [dispatch]);
+    }
+  
+  }, [dispatch , seller]);
 
   return (
     <BrowserRouter>
