@@ -43,7 +43,7 @@ const createProduct = async (req, res , next)=>{
 
 
 // get all products of the shop
-const getAllProducts = async (req, res,next)=>{
+const getAllProductsShop = async (req, res,next)=>{
 
      try{
 
@@ -61,7 +61,7 @@ const getAllProducts = async (req, res,next)=>{
 
 module.exports={
        createProduct,
-       getAllProducts
+       getAllProductsShop
 }
 
 
