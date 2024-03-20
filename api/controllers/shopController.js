@@ -6,7 +6,7 @@ const path = require("path");
 const fs = require("fs");
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "5m" });
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
 };
 const createShop = async (req, res, next) => {
   try {
