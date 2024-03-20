@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import SellerShopDashboardHeader from '../components/SellerShopDashboardHeader'
 import SellerShopDasboardSidebar from '../components/SellerShopDasboardSidebar'
 import SellerShopDashboardCreateProduct from '../components/DashboardComponents/SellerShopDashboardCreateProduct'
+import SellerShopDashboardProducts  from '../components/DashboardComponents/SellerShopDashboardProducts'
 
 const SellerShopDashboardPage = () => {
 
@@ -33,10 +34,16 @@ const SellerShopDashboardPage = () => {
          <SellerShopDasboardSidebar />
       </div>
      
-     <div className='flex justify-center items-center w-full'>
+     <div className='flex justify-center  w-full'>
      {tab === 'create-products' && <SellerShopDashboardCreateProduct/>}
-     </div>
      
+     {tab === 'products' && <SellerShopDashboardProducts/>}
+   
+
+
+     </div>
+
+   
       </div>
     </div>
   )

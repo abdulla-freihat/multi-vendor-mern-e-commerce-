@@ -26,8 +26,14 @@ import SellerPrivateRoute from "./components/SellerPrivateRoute"
 import MaybeShowNavbar from "./components/MaybeShowNavbar";
 
 
+import { getAllProductsShop } from "./redux/productSlice";
+
+
+
 function App() {
   const { token } = useSelector((state) => state.user);
+  const { seller } = useSelector((state) => state.seller);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,6 +66,20 @@ function App() {
     // Clear interval on component unmount
     return () => clearInterval(interval);
   }, [dispatch, token]);
+
+
+  useEffect(() => {
+    axios
+      .get(`${server}/product/all-products/${seller._id}`)
+      .then((res) => {
+        if (res.data.success === true) {
+          dispatch(getAllProductsShop(res.data.products));
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [dispatch]);
 
   return (
     <BrowserRouter>
