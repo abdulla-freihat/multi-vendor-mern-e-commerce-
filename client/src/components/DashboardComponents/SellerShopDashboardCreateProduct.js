@@ -118,7 +118,7 @@ const SellerShopDashboardCreateProduct = () => {
 
           <textarea
             rows={6}
-            required
+         
             value={description}
             name='description'
             className="outline-none border border-gray-300 placeholder-gray-400 p-1 resize-none"
