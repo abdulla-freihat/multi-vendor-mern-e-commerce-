@@ -68,7 +68,7 @@ try{
 const deleteEventsShop = async (req, res, next) => {
   try {
     const eventId = req.params.id;
-    const event = await productSchema.findByIdAndDelete(eventId);
+    const event = await eventSchema.findByIdAndDelete(eventId);
 
     if(!event){
         throw new errorHandler("Event not found", 400);
