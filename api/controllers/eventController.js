@@ -3,6 +3,9 @@ const shopSchema = require("../models/shopSchema");
 
 const eventSchema = require("../models/eventSchema");
 
+
+
+// create avent route
 const createEvent = async (req, res, next) => {
   try {
 
@@ -36,6 +39,31 @@ const createEvent = async (req, res, next) => {
   }
 };
 
+
+
+
+//gat all events shop 
+
+
+const getAllEventsShop = async (req, res ,next)=>{
+try{
+
+
+  const events  = await eventSchema.find({shopId:req.params.id});
+
+  return res.status(201).json({ success: true, events });
+
+
+}catch(err){
+
+   return next(err);
+}
+   
+
+}
+
+
 module.exports = {
   createEvent,
+  getAllEventsShop 
 };
