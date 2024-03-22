@@ -27,6 +27,8 @@ import MaybeShowNavbar from "./components/MaybeShowNavbar";
 
 
 import { getAllProductsShop } from "./redux/productSlice";
+import { getAllEventsShop } from "./redux/eventSlice";
+
 
 
 
@@ -77,6 +79,26 @@ function App() {
       .then((res) => {
         if (res.data.success === true) {
           dispatch(getAllProductsShop(res.data.products));
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    }
+  
+  }, [dispatch , seller]);
+
+
+
+  useEffect(() => {
+    if(seller){
+
+
+      axios
+      .get(`${server}/event/all-events/${seller._id}` ,)
+      .then((res) => {
+        if (res.data.success === true) {
+          dispatch(getAllEventsShop(res.data.events));
         }
       })
       .catch((err) => {

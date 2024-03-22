@@ -6,6 +6,7 @@ import SellerShopDasboardSidebar from '../components/SellerShopDasboardSidebar'
 import SellerShopDashboardCreateProduct from '../components/DashboardComponents/SellerShopDashboardCreateProduct'
 import SellerShopDashboardProducts  from '../components/DashboardComponents/SellerShopDashboardProducts'
 import SellerShopDashboardCreateEvent from '../components/DashboardComponents/SellerShopDashboardCreateEvent'
+import SellerShopDashboardEvents from '../components/DashboardComponents/SellerShopDashboardEvents'
 
 const SellerShopDashboardPage = () => {
 
@@ -41,6 +42,9 @@ const SellerShopDashboardPage = () => {
      {tab === 'products' && <SellerShopDashboardProducts/>}
 
      {tab === 'create-events' && <SellerShopDashboardCreateEvent/>}
+
+     {tab === 'events' && <SellerShopDashboardEvents/>}
+
 
 
 
