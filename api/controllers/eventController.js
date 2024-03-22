@@ -63,7 +63,27 @@ try{
 }
 
 
+
+//delete seller shop events
+const deleteEventsShop = async (req, res, next) => {
+  try {
+    const eventId = req.params.id;
+    const event = await productSchema.findByIdAndDelete(eventId);
+
+    if(!event){
+        throw new errorHandler("Event not found", 400);
+
+    }
+
+    return res.status(201).json({ success: true,  message: "event deleted successfully", event });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+
 module.exports = {
   createEvent,
-  getAllEventsShop 
+  getAllEventsShop ,
+  deleteEventsShop
 };
