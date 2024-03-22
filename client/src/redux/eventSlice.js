@@ -19,7 +19,7 @@ const eventSlice = createSlice({
 
     deleteEventsShop:(state,action)=>{
 
-      state.events = state.products.filter((event)=> event._id !== action.payload)
+      state.events = state.events.filter((event)=> event._id !== action.payload)
 
     }
   }

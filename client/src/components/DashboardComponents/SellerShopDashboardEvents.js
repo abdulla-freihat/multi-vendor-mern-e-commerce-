@@ -5,11 +5,47 @@ import { AiOutlineEye, AiOutlineDelete } from "react-icons/ai";
 import { DataGrid } from "@material-ui/data-grid";
 import { Button } from "@material-ui/core";
 
+import { deleteEventsShop } from "../../redux/eventSlice";
+import {server} from '../../server'
+import axios from 'axios'
+import toast from "react-hot-toast"
 
 const SellerShopDashboardEvents = () => {
   const { events} = useSelector((state) => state.event);
+  const {token} = useSelector((state) => state.seller);
+  const dispatch= useDispatch();
 
 
+
+  const handleDeleteShopEvent = (eventId) => {
+  
+  
+  
+    axios
+        .delete(`${server}/event/delete-events/${eventId}` ,{
+
+          headers:{
+            'Authorization' : `Bearer ${token}`
+           }
+        })
+        .then((res) => {
+          
+            if(res.data.success === true){
+              dispatch(deleteEventsShop(res.data.event));
+                   toast.success(res.data.message);
+           
+            }
+        })
+        .catch((err) => {
+          if (err.response && err.response.data && err.response.data.error) {
+       
+            toast.error(err.response.data.error);
+        } else {
+            
+            toast.error("An error occurred");
+        }
+        });
+    };
 
   const columns = [
     { field: "id", headerName: "Product Id", minWidth: 150, flex: 0.7 },
@@ -77,7 +113,7 @@ const SellerShopDashboardEvents = () => {
         return (
           <>
             <Button>
-              <AiOutlineDelete size={20} />
+              <AiOutlineDelete size={20} onClick={()=>handleDeleteShopEvent(params.id)} />
             </Button>
           </>
         );
