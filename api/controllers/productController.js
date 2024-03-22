@@ -6,6 +6,17 @@ const errorHandler = require("../utils/errorHandler");
 //create product
 const createProduct = async (req, res, next) => {
   try {
+
+   const {name , description , category , discountPrice , stock , images} = req.body;
+
+   if(!name || !description || !category || !discountPrice || !stock || !images ){
+
+    throw new errorHandler("All required fields must be filled", 400);
+
+   }
+
+
+
     const shopId = req.body.shopId;
     const shop = await shopSchema.findById(shopId);
 
