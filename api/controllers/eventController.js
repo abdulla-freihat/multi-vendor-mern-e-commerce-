@@ -5,6 +5,10 @@ const eventSchema = require("../models/eventSchema");
 
 const createEvent = async (req, res, next) => {
   try {
+
+
+
+
     const shopId = req.body.shopId;
 
     const shop = await shopSchema.findById(shopId);
@@ -27,7 +31,7 @@ const createEvent = async (req, res, next) => {
         event,
       });
     }
-  } catch {
+  } catch(err) {
     return next(err);
   }
 };

@@ -3,6 +3,7 @@ import {combineReducers, configureStore } from '@reduxjs/toolkit'
 import userSlice from './userSlice'
 import sellerSlice from './sellerSlice';
 import productSlice from './productSlice';
+import eventSlice from './eventSlice';
 import {persistReducer , persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -11,7 +12,8 @@ import storage from "redux-persist/lib/storage";
 const rootReducer= combineReducers({
   user: userSlice,
   seller:sellerSlice,
-  product:productSlice
+  product:productSlice,
+  event:eventSlice
 })
 
 
