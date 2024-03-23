@@ -2,18 +2,12 @@ const productSchema = require("../models/productSchema");
 
 const shopSchema = require("../models/shopSchema");
 const errorHandler = require("../utils/errorHandler");
+const fs =require('fs');
 
 //create product
 const createProduct = async (req, res, next) => {
   try {
 
-   const {name , description , category , discountPrice , stock , images} = req.body;
-
-   if(!name || !description || !category || !discountPrice || !stock || !images ){
-
-    throw new errorHandler("All required fields must be filled", 400);
-
-   }
 
 
 
@@ -59,7 +53,25 @@ const getAllProductsShop = async (req, res, next) => {
 const deleteProductsShop = async (req, res, next) => {
   try {
     const productId = req.params.id;
+    const productData = await productSchema.findById(productId);
+
+    productData.images.forEach((imageUrl)=>{
+
+       const filename = imageUrl;
+       const filePath = `uploads/${filename}`;
+
+       fs.unlink(filePath , (err)=>{
+
+         if(err){
+
+           console.log(err)
+         }
+       })
+    })
+
+
     const product = await productSchema.findByIdAndDelete(productId);
+
 
     if(!product){
         throw new errorHandler("Product not found", 400);
