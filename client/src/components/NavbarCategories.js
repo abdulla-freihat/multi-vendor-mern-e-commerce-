@@ -18,8 +18,11 @@ const NavbarCategories = () => {
         className="outline-none border rounded-md h-[5vh] md:h-[5vh] w-[30vw] md:w-[20vw]"
         onChange={handleNavigate}
       >
+
+          <option>Choose Category</option>
         {categoriesData &&
           categoriesData.map((category) => (
+
             <option key={category.id} value={category.title}>
               {category.title}
             </option>
