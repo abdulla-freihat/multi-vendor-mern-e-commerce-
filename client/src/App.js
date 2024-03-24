@@ -149,6 +149,9 @@ function App() {
         <Route path="/shop-create" element={<SellerCreatePage />}></Route>
         <Route path="/shop-login" element={<SellerLoginPage />}></Route>
 
+
+ 
+
         <Route element={<SellerPrivateRoute />}>
         <Route path="/shop/:id" element={<ShopHomePage />}></Route>
         <Route path="/dashboard" element={<SellerShopDashboardPage />}></Route>

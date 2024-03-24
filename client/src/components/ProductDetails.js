@@ -2,10 +2,14 @@ import React, { useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
+import {backend_url} from '../server'
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
+
+
+
 
   const incrementCount = () => {
     setCount(count + 1);
@@ -23,7 +27,7 @@ const ProductDetails = ({ data }) => {
         <div className="flex flex-col lg:flex-row  gap-8">
           <div className="flex flex-col gap-3 flex-1 items-center ">
             <img
-              src={data.image_Url[select].url}
+            src={`${backend_url}${data.images && data.images[select]}`}
               className="border  w-[250px] h-[250px] object-cover"
               onClick={() => setSelect(0)}
             />
@@ -35,7 +39,7 @@ const ProductDetails = ({ data }) => {
                 } cursor-pointer `}
               >
                 <img
-                  src={data.image_Url[0].url}
+              src={`${backend_url}${data.images && data.images[0]}`}
                   className=" h-[150px] object-cover"
                   onClick={() => setSelect(0)}
                 />
@@ -46,7 +50,7 @@ const ProductDetails = ({ data }) => {
                 } cursor-pointer `}
               >
                 <img
-                  src={data.image_Url[1].url}
+                  src={`${backend_url}${data.images && data.images[1]}`}
                   className=" h-[150px] object-cover"
                   onClick={() => setSelect(1)}
                 />
@@ -61,10 +65,10 @@ const ProductDetails = ({ data }) => {
             <p className="text-gray-500 text-md">{data.description}</p>
             <div className="flex gap-2">
               <span className="font-semibold">
-                {data.price === 0 ? data.price : data.discount_price}$
+                {data.originalPrice === 0 ? data.originalPrice : data.discountPrice}$
               </span>
               <span className="text-red-600 line-through text-sm">
-                {data.price ? data.price + "$" : null}
+                {data.originalPrice? data.originalPrice + "$" : null}
               </span>
             </div>
 
@@ -190,7 +194,7 @@ const ProductDetailsInfo = ({ data }) => {
           <div className="flex flex-col gap-2 flex-1">
             <div className="flex gap-2 items-center">
               <img
-                src={data.shop.shop_avatar.url}
+                src={data.shop.avatar}
                 className="w-16 h-16 rounded-full "
               />
               <div>
@@ -200,7 +204,7 @@ const ProductDetailsInfo = ({ data }) => {
                 >
                   {data.shop.name}
                 </Link>
-                <p>({data.shop.ratings}) Ratings</p>
+              
               </div>
             </div>
 
@@ -227,7 +231,7 @@ const ProductDetailsInfo = ({ data }) => {
                 <span className="font-semibold">Total reviews :</span> 90{" "}
               </h6>
               <Link
-                to=""
+                to={`/shop/${data.shop._id}`}
                 className="bg-black px-4 py-2 text-white rounded-md text-center"
               >
                 Visit shop

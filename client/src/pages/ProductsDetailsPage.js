@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { productData } from '../static/data';
 import ProductDetails from '../components/ProductDetails';
+import {useSelector} from 'react-redux'
 
 
 const ProductsDetailsPage = () => {
@@ -10,14 +11,15 @@ const ProductsDetailsPage = () => {
     const {name} = useParams();
 
     const [data , setData] = useState(null);
-    console.log(data)
+  
+    const {allProducts} = useSelector(state=>state.product)
 
 
 
 
     useEffect(()=>{
 
-     const product = productData.find((i)=> i.name === name);
+     const product = allProducts.find((i)=> i.name === name);
 
      setData(product)
 
