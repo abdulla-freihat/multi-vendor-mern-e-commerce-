@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   product: null,
   products: null,
+  allProducts:null
 };
 
 const productSlice = createSlice({
@@ -21,11 +22,15 @@ const productSlice = createSlice({
 
       state.products = state.products.filter((product)=> product._id !== action.payload)
 
+    },
+    getAllProducts:(state , action)=>{
+
+        state.allProducts = action.payload;
     }
   }
 
  
 });
 
-export const { productCreate, getAllProductsShop , deleteProductsShop } = productSlice.actions;
+export const { productCreate, getAllProductsShop , deleteProductsShop ,    getAllProducts } = productSlice.actions;
 export default productSlice.reducer;

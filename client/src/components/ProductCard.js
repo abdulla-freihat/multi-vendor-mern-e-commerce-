@@ -4,6 +4,7 @@ import { BsCartPlus } from "react-icons/bs";
 import { FaRegEye } from "react-icons/fa6";
 import ProductModal from "./ProductModal";
 import ProductsCart from "./ProductsCart";
+import {backend_url} from "../server"
 
 
 const ProductCard = ({ product }) => {
@@ -34,7 +35,7 @@ const ProductCard = ({ product }) => {
       <div className="flex gap-1 ">
         <Link to={`/product/${product.name}`}>
           <img
-            src={product.image_Url[0].url}
+            src={`${backend_url}${product.images && product.images[0]}`}
             alt={product.category}
             className="w-full h-40 object-cover"
           />
@@ -48,7 +49,7 @@ const ProductCard = ({ product }) => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 w-full">
         <Link className="text-sm text-blue-500 hover:text-blue-600">
           {product.shop.name}
         </Link>
@@ -62,13 +63,13 @@ const ProductCard = ({ product }) => {
         <div className="flex justify-between">
           <div className="flex gap-2">
             <span className="font-semibold">
-              {product.price === 0 ? product.price : product.discount_price}$
+              {product.originalPrice === 0 ? product.originalPrice : product.discountPrice}$
             </span>
             <span className="text-red-600 line-through text-sm">
-              {product.price ? product.price + "$" : null}
+              {product.originalPrice ? product.originalPrice + "$" : null}
             </span>
           </div>
-          <span className="text-green-600">{product.total_sell} sold</span>
+          <span className="text-green-600">{product.sold_out} sold</span>
         </div>
       </div>
 
