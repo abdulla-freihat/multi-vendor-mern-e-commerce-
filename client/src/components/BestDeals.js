@@ -20,12 +20,12 @@ const BestDeals = () => {
 
   useEffect(()=>{
 
-     const products = allProducts && allProducts.sort((a,b)=> b.sold_out -  a.sold_out)
-     const firstFiveProducts = products.slice(0,5);
+     const products = allProducts.slice(0,5);
+     const firstFiveProducts = products;
 
      setData(firstFiveProducts)
 
-  } , [])
+  } , [allProducts])
   return (
   <div className='max-w-6xl mx-auto my-12'>
     <h3 className='font-semibold text-xl'>Best Deals</h3>

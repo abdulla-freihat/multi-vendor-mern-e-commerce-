@@ -11,11 +11,10 @@ const BestSellingPage = () => {
 
 
   useEffect(() => {
-    const products =
-    allProducts && allProducts.sort((a, b) => a.sold_out - b.sold_out);
 
-    setData(products);
-  }, []);
+
+    setData(allProducts);
+  }, [allProducts]);
   return (
     <>
       <div className="min-h-screen">
