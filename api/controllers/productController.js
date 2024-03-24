@@ -84,8 +84,28 @@ const deleteProductsShop = async (req, res, next) => {
   }
 };
 
+
+
+//get all products
+
+const getAllProducts = async (req ,res , next)=>{
+
+   try{
+
+     const products = await productSchema.find({});
+
+     return res.status(201).json({ success: true,  products });
+
+
+   }catch(err){
+
+     return next(err)
+   }
+}
+
 module.exports = {
   createProduct,
   getAllProductsShop,
   deleteProductsShop,
+  getAllProducts
 };
