@@ -85,7 +85,7 @@ const getAllEvents= async (req ,res , next)=>{
 
   try{
 
-    const events = await productSchema.find({});
+    const events = await eventSchema.find({});
 
     return res.status(201).json({ success: true,  events });
 
