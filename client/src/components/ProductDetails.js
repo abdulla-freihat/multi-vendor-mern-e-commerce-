@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
+
 import {backend_url} from '../server'
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);
@@ -161,25 +162,7 @@ const ProductDetailsInfo = ({ data }) => {
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
 
-          <p className="my-3 text-md  ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-
-          <p className="my-3 text-md  ">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
+          
         </>
       ) : null}
 
@@ -194,12 +177,12 @@ const ProductDetailsInfo = ({ data }) => {
           <div className="flex flex-col gap-2 flex-1">
             <div className="flex gap-2 items-center">
               <img
-                src={data.shop.avatar}
+                src={`${backend_url}${data.shop.avatar}`}
                 className="w-16 h-16 rounded-full "
               />
               <div>
                 <Link
-                  to="/shop"
+                    to={`/shop/${data.shop._id}`}
                   className="text-blue-500 hover:text-blue-600 cursor-pointer"
                 >
                   {data.shop.name}
@@ -222,10 +205,10 @@ const ProductDetailsInfo = ({ data }) => {
           <div className="flex justify-start md:justify-end  flex-1">
             <div className="flex flex-col gap-2">
               <h6>
-                <span className="font-semibold">Joined On :</span> 8 May 2024{" "}
+                <span className="font-semibold">Joined On :</span> {data.shop.createdAt.slice(0,10)}
               </h6>
               <h6>
-                <span className="font-semibold">Total products :</span> 122{" "}
+                <span className="font-semibold">Total products :</span> {data.length}
               </h6>
               <h6>
                 <span className="font-semibold">Total reviews :</span> 90{" "}
