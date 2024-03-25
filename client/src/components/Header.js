@@ -47,7 +47,7 @@ const Header = () => {
     const term = e.target.value;
     setSearchTerm(term);
 
-    const filteredProducts = productData.filter((product) =>
+    const filteredProducts = allProducts.filter((product) =>
       product.name.toLowerCase().includes(term.toLowerCase())
     );
 
@@ -85,8 +85,8 @@ const Header = () => {
 
           {searchData && searchData.length !== 0 ? (
             <div className="absolute top-14 min-h-[30vh]  md:w-[400px] lg:w-[400px] bg-slate-50 shadow-sm-2 z-100 p-1 flex flex-col gap-2">
-              {allProducts&&
-              allProducts.map((i, index) => {
+              {searchData &&
+                searchData.map((i, index) => {
                   return (
                     <Link to={`/product/${i.name}`}>
                       <div
