@@ -17,7 +17,11 @@ const SellerShopDashboardProducts = () => {
 
 
   useEffect(()=>{
-    dispatch(fetchProductsShop(seller._id))
+    if(seller){
+
+      dispatch(fetchProductsShop(seller._id))
+    }
+  
 }  , [dispatch])
 
   const handleDeleteShopProduct = (productId) => {
