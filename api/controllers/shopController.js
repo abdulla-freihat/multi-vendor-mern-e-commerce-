@@ -112,7 +112,34 @@ const loginShop = async(req,res,next)=>{
    }
 }
 
+
+
+const getShopInfo =async (req, res ,next)=>{
+
+   try{
+
+
+   const shop  = await shopSchema.findById(req.params.id)
+
+   if (!shop) {
+    throw new errorHandler("Shop not found.", 400);
+
+   }
+
+    return res
+    .status(201)
+    .json({ success: true, shop });
+
+
+
+   }catch(err){
+
+     return next(err);
+   }
+}
+
 module.exports = {
   createShop,
-  loginShop
+  loginShop,
+  getShopInfo
 };
