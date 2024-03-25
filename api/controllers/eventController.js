@@ -78,8 +78,27 @@ const deleteEventsShop = async (req, res, next) => {
   }
 };
 
+
+//get all products
+
+const getAllEvents= async (req ,res , next)=>{
+
+  try{
+
+    const events = await productSchema.find({});
+
+    return res.status(201).json({ success: true,  events });
+
+
+  }catch(err){
+
+    return next(err)
+  }
+}
+
 module.exports = {
   createEvent,
   getAllEventsShop,
   deleteEventsShop,
+  getAllEvents
 };

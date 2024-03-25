@@ -1,6 +1,6 @@
 const express = require("express");
 const upload = require("../utils/multer");
-const {createEvent , getAllEventsShop ,  deleteEventsShop} = require("../controllers/eventController")
+const {createEvent , getAllEventsShop ,  deleteEventsShop , getAllEvents} = require("../controllers/eventController")
 
 const verifyToken = require('../utils/verifyToken');
 
@@ -19,6 +19,11 @@ router.get('/all-events/:id' ,  getAllEventsShop);
 //delete seller dashboard shop events
 
 router.delete('/delete-events/:id' , verifyToken , deleteEventsShop);
+
+
+//get all events route
+
+router.get('/all-events' , getAllEvents)
 
 
 module.exports = router;
