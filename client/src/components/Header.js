@@ -15,6 +15,7 @@ import { backend_url } from "../server";
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { seller } = useSelector((state) => state.seller);
+  const { allProducts } = useSelector((state) => state.product);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -84,8 +85,8 @@ const Header = () => {
 
           {searchData && searchData.length !== 0 ? (
             <div className="absolute top-14 min-h-[30vh]  md:w-[400px] lg:w-[400px] bg-slate-50 shadow-sm-2 z-100 p-1 flex flex-col gap-2">
-              {searchData &&
-                searchData.map((i, index) => {
+              {allProducts&&
+              allProducts.map((i, index) => {
                   return (
                     <Link to={`/product/${i.name}`}>
                       <div
@@ -93,7 +94,7 @@ const Header = () => {
                         className="w-full flex items-start-py-3 border-b p-2"
                       >
                         <img
-                          src={`${i.image_Url[0]?.url}`}
+                          src={`${backend_url}${i.images[0]}`}
                           alt=""
                           className="w-[40px] h-[40px] mr-[10px]"
                         />
