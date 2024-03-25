@@ -31,6 +31,23 @@ import { getAllEventsShop } from "./redux/eventSlice";
 import {getAllProducts} from "./redux/productSlice";
 
 
+export const fetchProductsShop = (id)=>(dispatch)=>{
+
+      axios
+      .get(`${server}/product/all-products/${id}`)
+      .then((res) => {
+        if (res.data.success === true) {
+          dispatch(getAllProductsShop(res.data.products));
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+  
+
+   
+}
 
 
 function App() {
@@ -71,23 +88,9 @@ function App() {
   }, [dispatch, token]);
 
 
-  useEffect(() => {
-    if(seller){
 
 
-      axios
-      .get(`${server}/product/all-products/${seller._id}` ,)
-      .then((res) => {
-        if (res.data.success === true) {
-          dispatch(getAllProductsShop(res.data.products));
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-    }
-  
-  }, [dispatch , seller]);
+
 
 
 
@@ -150,10 +153,10 @@ function App() {
         <Route path="/shop-login" element={<SellerLoginPage />}></Route>
 
 
- 
+ <Route path="/shop/:id" element={<ShopHomePage />}></Route>
 
         <Route element={<SellerPrivateRoute />}>
-        <Route path="/shop/:id" element={<ShopHomePage />}></Route>
+        
         <Route path="/dashboard" element={<SellerShopDashboardPage />}></Route>
 
 

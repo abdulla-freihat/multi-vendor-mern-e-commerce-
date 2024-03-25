@@ -1,11 +1,23 @@
-import React, { useState } from 'react'
-import {productData} from '../static/data';
+import React, { useState  , useEffect} from 'react'
+
 import ProductCard from '../components/ProductCard'
-import { Link } from 'react-router-dom';
+import { Link  , useParams} from 'react-router-dom';
+import {useSelector , useDispatch} from 'react-redux';
+import { fetchProductsShop } from '../App';
 
 const SellerHomePageData = ({isOwner}) => {
 
     const [active ,setActive] = useState(1)
+
+     const {products} = useSelector(state=>state.product)
+     const {seller} = useSelector(state=>state.seller)
+     const {id } = useParams();
+     const dispatch = useDispatch();
+
+
+     useEffect(()=>{
+         dispatch(fetchProductsShop(id))
+     }  , [dispatch])
   return (
     <div className='w-full flex flex-col gap-4 '>
 
@@ -29,7 +41,7 @@ const SellerHomePageData = ({isOwner}) => {
 
     </div>
 
-    {isOwner && (
+    {seller && (
 
         <Link to='/dashboard' className='bg-black text-white rounded-md py-2 px-4'>Go To Dashboard</Link>
 
@@ -43,7 +55,7 @@ const SellerHomePageData = ({isOwner}) => {
 <div className='grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
 
 {
-    productData && productData.map((product , index)=>(
+   products && products.map((product , index)=>(
           
           <ProductCard  product={product} key={index}  isShop={true}/>
 

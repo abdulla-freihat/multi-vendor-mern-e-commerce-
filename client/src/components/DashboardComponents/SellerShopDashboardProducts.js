@@ -8,15 +8,17 @@ import { deleteProductsShop } from "../../redux/productSlice";
 import {server} from '../../server'
 import axios from 'axios'
 import toast from "react-hot-toast"
-
+import { fetchProductsShop } from "../../App";
 const SellerShopDashboardProducts = () => {
   const { products } = useSelector((state) => state.product);
-  const {token} = useSelector((state) => state.seller);
+  const {token , seller} = useSelector((state) => state.seller);
   const dispatch= useDispatch();
   const params= useParams();
 
 
-
+  useEffect(()=>{
+    dispatch(fetchProductsShop(seller._id))
+}  , [dispatch])
 
   const handleDeleteShopProduct = (productId) => {
   
