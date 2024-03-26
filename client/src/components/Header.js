@@ -16,6 +16,8 @@ const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const { seller } = useSelector((state) => state.seller);
   const { allProducts } = useSelector((state) => state.product);
+  const {  cart} = useSelector((state) => state.cart);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -159,7 +161,7 @@ const Header = () => {
           <div class="relative py-2 cursor-pointer" onClick={openProductsCart} >
             <div class="top-0 absolute left-3 ">
               <p class="flex h-2 w-2 items-center justify-center rounded-full bg-orange-400 p-3 text-xs text-white">
-                0
+                {cart.length}
               </p>
             </div>
             <IoCartOutline  className="w-8 h-8 cursor-pointer" />
