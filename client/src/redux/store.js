@@ -4,16 +4,18 @@ import userSlice from './userSlice'
 import sellerSlice from './sellerSlice';
 import productSlice from './productSlice';
 import eventSlice from './eventSlice';
+import cartSlice from './cartSlice';
 import {persistReducer , persistStore} from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 
 
 const rootReducer= combineReducers({
-  user: userSlice,
+  user:userSlice,
   seller:sellerSlice,
   product:productSlice,
-  event:eventSlice
+  event:eventSlice,
+  cart:cartSlice,
 })
 
 

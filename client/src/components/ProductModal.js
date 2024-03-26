@@ -2,10 +2,40 @@ import React from 'react'
 import { FaTimes } from "react-icons/fa";
 import { BsCartPlus } from "react-icons/bs";
 import {backend_url} from "../server"
+import { addToCart } from "../redux/cartSlice";
+import toast from 'react-hot-toast';
+import {useDispatch  , useSelector} from 'react-redux';
 
 
 
 const ProductModal = ({closeProductModal , product}) => {
+
+const dispatch = useDispatch();
+const {cart} = useSelector(state => state.cart)
+
+console.log('Cart State:', cart); // Add this line for debugging
+
+
+  const addToCartHandler = (id)=>{
+
+       const isExists = cart && cart.find((i)=>i._id === id)
+
+        if(isExists){
+
+          toast.error("Product already in cart"); 
+
+        }else{
+   
+          dispatch(addToCart({...product})); 
+          toast.success("Product added to cart"); 
+           
+         }
+
+
+    
+     
+  }
+
   return (
     <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 p-2"  >
     <div className="relative bg-white p-6 rounded-md max-w-xl">
@@ -24,7 +54,7 @@ const ProductModal = ({closeProductModal , product}) => {
           <p className="text-xs my-3">{product.description}</p>
           <div className="flex justify-between items-center border p-2"> 
           <span className="font-semibold"> {product.originalPrice === 0 ? product.originalPrice : product.discountPrice}$</span>
-          <button className="bg-black text-white px-4 py-2 rounded-md text-sm flex items-center gap-2">Add to cart <BsCartPlus/> </button>
+          <button onClick={()=>addToCartHandler(product._id)} className="bg-black text-white px-4 py-2 rounded-md text-sm flex items-center gap-2">Add to cart <BsCartPlus/> </button>
           </div>
         </div>
 
