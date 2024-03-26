@@ -29,6 +29,8 @@ import MaybeShowNavbar from "./components/MaybeShowNavbar";
 import { getAllProductsShop } from "./redux/productSlice";
 import { getAllEventsShop } from "./redux/eventSlice";
 import {getAllProducts} from "./redux/productSlice";
+import {getAllEvents} from "./redux/eventSlice";
+
 
 
 export const fetchProductsShop = (id)=>(dispatch)=>{
@@ -48,6 +50,23 @@ export const fetchProductsShop = (id)=>(dispatch)=>{
 
    
 }
+
+
+
+export const fetchEventsShop = (id)=>(dispatch)=>{
+
+  axios
+      .get(`${server}/event/all-events/${id}` ,)
+      .then((res) => {
+        if (res.data.success === true) {
+          dispatch(getAllEventsShop(res.data.events));
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+}
+
 
 
 function App() {
@@ -94,24 +113,6 @@ function App() {
 
 
 
-  useEffect(() => {
-    if(seller){
-
-
-      axios
-      .get(`${server}/event/all-events/${seller._id}` ,)
-      .then((res) => {
-        if (res.data.success === true) {
-          dispatch(getAllEventsShop(res.data.events));
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-    }
-  
-  }, [dispatch , seller]);
-
 
 
 
@@ -131,6 +132,25 @@ function App() {
 
   
   }, [dispatch]);
+
+
+
+  useEffect(() => {
+
+
+    axios
+    .get(`${server}/event/all-events` ,)
+    .then((res) => {
+      if (res.data.success === true) {
+        dispatch(getAllEvents(res.data.events));
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+
+
+}, [dispatch]);
 
   return (
     <BrowserRouter>

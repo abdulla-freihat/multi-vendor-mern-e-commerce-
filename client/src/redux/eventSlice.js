@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
  event: null,
   events: null,
+  allEvents:null
 };
 
 const eventSlice = createSlice({
@@ -21,11 +22,15 @@ const eventSlice = createSlice({
 
       state.events = state.events.filter((event)=> event._id !== action.payload)
 
-    }
+    },
+    getAllEvents:(state , action)=>{
+
+      state.allEvents = action.payload;
+  }
   }
 
  
 });
 
-export const { eventCreate, getAllEventsShop , deleteEventsShop } = eventSlice.actions;
+export const { eventCreate, getAllEventsShop , deleteEventsShop ,  getAllEvents } = eventSlice.actions;
 export default eventSlice.reducer;

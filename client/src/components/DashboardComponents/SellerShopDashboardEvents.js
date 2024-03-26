@@ -9,11 +9,22 @@ import { deleteEventsShop } from "../../redux/eventSlice";
 import {server} from '../../server'
 import axios from 'axios'
 import toast from "react-hot-toast"
+import { fetchEventsShop } from "../../App";
 
 const SellerShopDashboardEvents = () => {
   const { events} = useSelector((state) => state.event);
-  const {token} = useSelector((state) => state.seller);
+  const {token , seller} = useSelector((state) => state.seller);
   const dispatch= useDispatch();
+
+
+  useEffect(()=>{
+    if(seller){
+
+      dispatch(fetchEventsShop(seller._id))
+    }
+  
+}  , [dispatch])
+
 
 
 
