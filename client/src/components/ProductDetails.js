@@ -1,19 +1,37 @@
 import React, { useState } from "react";
 import { BsCartPlus } from "react-icons/bs";
 import { Link } from "react-router-dom";
-
-
-import {backend_url} from '../server'
+import toast from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { backend_url } from "../server";
+import { addToCart } from "../redux/cartSlice";
 const ProductDetails = ({ data }) => {
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
+   const dispatch = useDispatch();
+  const {cart} = useSelector(state => state.cart)
+  const {currentUser} = useSelector(state => state.user)
+
+  const addToCartHandler = (id) => {
+    const isExists = cart && cart.find((i) => i._id === id);
 
 
+    if (isExists) {
+      toast.error("Product already in cart");
+    } else {
+      if (currentUser) {
+        dispatch(addToCart({ ...data, qty: count }));
+        toast.success("Product added to cart");
+      } else {
+        toast("Please login first.");
+      }
+    }
+  };
 
-
-  const incrementCount = () => {
+  const incrementCount= () => {
     setCount(count + 1);
+
   };
 
   const decrementCount = () => {
@@ -28,7 +46,7 @@ const ProductDetails = ({ data }) => {
         <div className="flex flex-col lg:flex-row  gap-8">
           <div className="flex flex-col gap-3 flex-1 items-center ">
             <img
-            src={`${backend_url}${data.images && data.images[select]}`}
+              src={`${backend_url}${data.images && data.images[select]}`}
               className="border  w-[250px] h-[250px] object-cover"
               onClick={() => setSelect(0)}
             />
@@ -40,7 +58,7 @@ const ProductDetails = ({ data }) => {
                 } cursor-pointer `}
               >
                 <img
-              src={`${backend_url}${data.images && data.images[0]}`}
+                  src={`${backend_url}${data.images && data.images[0]}`}
                   className=" h-[150px] object-cover"
                   onClick={() => setSelect(0)}
                 />
@@ -66,10 +84,13 @@ const ProductDetails = ({ data }) => {
             <p className="text-gray-500 text-md">{data.description}</p>
             <div className="flex gap-2">
               <span className="font-semibold">
-                {data.originalPrice === 0 ? data.originalPrice : data.discountPrice}$
+                {data.originalPrice === 0
+                  ? data.originalPrice
+                  : data.discountPrice}
+                $
               </span>
               <span className="text-red-600 line-through text-sm">
-                {data.originalPrice? data.originalPrice + "$" : null}
+                {data.originalPrice ? data.originalPrice + "$" : null}
               </span>
             </div>
 
@@ -92,7 +113,7 @@ const ProductDetails = ({ data }) => {
               </button>
             </div>
 
-            <button className="py-2 px-2 bg-black text-white rounded-md flex items-center justify-center gap-2 w-full  md:w-[25%]">
+            <button onClick={()=>addToCartHandler(data._id)} className="py-2 px-2 bg-black text-white rounded-md flex items-center justify-center gap-2 w-full  md:w-[25%]">
               Add to cart <BsCartPlus />
             </button>
           </div>
@@ -161,8 +182,6 @@ const ProductDetailsInfo = ({ data }) => {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </p>
-
-          
         </>
       ) : null}
 
@@ -182,12 +201,11 @@ const ProductDetailsInfo = ({ data }) => {
               />
               <div>
                 <Link
-                    to={`/shop/${data.shop._id}`}
+                  to={`/shop/${data.shop._id}`}
                   className="text-blue-500 hover:text-blue-600 cursor-pointer"
                 >
                   {data.shop.name}
                 </Link>
-              
               </div>
             </div>
 
@@ -205,10 +223,12 @@ const ProductDetailsInfo = ({ data }) => {
           <div className="flex justify-start md:justify-end  flex-1">
             <div className="flex flex-col gap-2">
               <h6>
-                <span className="font-semibold">Joined On :</span> {data.shop.createdAt.slice(0,10)}
+                <span className="font-semibold">Joined On :</span>{" "}
+                {data.shop.createdAt.slice(0, 10)}
               </h6>
               <h6>
-                <span className="font-semibold">Total products :</span> {data.length}
+                <span className="font-semibold">Total products :</span>{" "}
+                {data.length}
               </h6>
               <h6>
                 <span className="font-semibold">Total reviews :</span> 90{" "}

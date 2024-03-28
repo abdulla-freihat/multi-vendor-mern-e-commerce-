@@ -75,43 +75,6 @@ function App() {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const checkTokenExpiration = async () => {
-      try {
-        if (token) {
-          const response = await axios.get(`${server}/auth/check-token`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          // Token is valid, do nothing
-        }
-      } catch (error) {
-        // If token expiration error is received, log out the user
-        if (error.response && error.response.status === 401) {
-          dispatch(logout());
-          Navigate("/sign-n");
-        }
-      }
-    };
-
-    // Check token expiration on component mount
-    checkTokenExpiration();
-
-    // Set up interval to check token expiration every 5 minutes (adjust as needed)
-    const interval = setInterval(checkTokenExpiration, 5 * 60 * 1000);
-
-    // Clear interval on component unmount
-    return () => clearInterval(interval);
-  }, [dispatch, token]);
-
-
-
-
-
-
-
 
 
 

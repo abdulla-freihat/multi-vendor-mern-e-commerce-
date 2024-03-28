@@ -5,6 +5,7 @@ import {backend_url} from "../server"
 import { addToCart } from "../redux/cartSlice";
 import toast from 'react-hot-toast';
 import {useDispatch  , useSelector} from 'react-redux';
+import { current } from '@reduxjs/toolkit';
 
 
 
@@ -12,8 +13,9 @@ const ProductModal = ({closeProductModal , product}) => {
 
 const dispatch = useDispatch();
 const {cart} = useSelector(state => state.cart)
+const {currentUser} = useSelector(state => state.user)
 
-console.log('Cart State:', cart); // Add this line for debugging
+
 
 
   const addToCartHandler = (id)=>{
@@ -25,9 +27,18 @@ console.log('Cart State:', cart); // Add this line for debugging
           toast.error("Product already in cart"); 
 
         }else{
+
+          if(currentUser){
+
+            dispatch(addToCart({...product , qty:1})); 
+            toast.success("Product added to cart"); 
+          }else{
+
+             toast('Please login first.')
+          }
    
-          dispatch(addToCart({...product})); 
-          toast.success("Product added to cart"); 
+           
+         
            
          }
 
