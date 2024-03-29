@@ -33,6 +33,11 @@ password:{
       select: false,
 },
 
+phoneNumber:{
+
+type:String
+},
+
 avatar:{
 
       type:String,
