@@ -117,14 +117,69 @@ const signin = async (req, res, next) => {
 };
 
 
-const checkToken = async(req, res,next)=>{
+//update user route
 
-   // If the middleware verifyToken passes, it means the token is valid and not expired
-  res.status(200).json({ message: 'Token is valid.' });
+const updateUser = async (req, res ,next)=>{
+ try{
+
+  
+
+  let newPassword = req.body.password;
+
+    // Validate password complexity before hashing
+    const passwordRegex = /^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{6,}$/;
+    if (newPassword && !passwordRegex.test(newPassword)) {
+      throw new errorHandler(
+        "Updated password must be at least 6 characters long and contain at least one uppercase letter and one number",
+        400
+      );
+    }
+
+    // Hash the password only if it's provided and valid
+    if (newPassword) {
+      const salt = await bcrypt.genSalt(10);
+      newPassword = await bcrypt.hash(newPassword, salt);
+    }
+
+
+
+
+   const  userUpdated  =  await userSchema.findByIdAndUpdate(req.params.id , {
+
+    $set : {
+
+       username : req.body.username,
+       email: req.body.email,
+       password: newPassword,
+       avatar: req.body.avatar,
+       phoneNumber: req.body.phoneNumber,
+
+     
+    }
+   }, {new : true} )  
+
+   const {password , ...rest} = userUpdated._doc;
+
+   return res
+    .status(201)
+    .json({ success: true, message: "user updated successfully", rest});
+
+   
+ }catch(err){
+
+   return next(err);
+ }
+    
+
+
+
+   
 }
 
 module.exports = {
   signup,
   signin,
-  checkToken
+  updateUser
+  
+
 };
