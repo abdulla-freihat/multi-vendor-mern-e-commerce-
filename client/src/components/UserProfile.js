@@ -8,7 +8,7 @@ import { updateUser } from "../redux/userSlice";
 import axios from "axios";
 
 const UserProfile = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser , token } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   const [changesMade, setChangesMade] = useState(false);
@@ -31,8 +31,11 @@ const UserProfile = () => {
       return;
     }
 
+
+    const config = { headers: { "Content-Type": "application/json " ,  Authorization: `Bearer ${token}` }};
+
     axios
-      .put(`${server}/auth/update-user/${currentUser._id}`, formData)
+      .put(`${server}/auth/update-user/${currentUser._id}`, formData , config)
       .then((res) => {
         if (res.data.success === true) {
           dispatch(updateUser(res.data.rest));
