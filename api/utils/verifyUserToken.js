@@ -1,12 +1,12 @@
+
 const jwt = require('jsonwebtoken');
 
-const sellerSchema = require('../models/shopSchema');
+const userSchema = require('../models/userSchema');
 
 
+//verify user token
 
-
-//verify Seller token
-const verifyToken = async(req , res  , next)=>{
+const verifyUserToken = async(req , res  , next)=>{
 
     //verify authentication
     const {authorization} = req.headers;
@@ -24,7 +24,7 @@ const verifyToken = async(req , res  , next)=>{
         const {_id} = jwt.verify(token , process.env.JWT_SECRET);
 
 
-         req.seller = await sellerSchema.findOne({_id}).select('_id');
+         req.user = await userSchema.findOne({_id}).select('_id');
 
          next();
          
@@ -42,8 +42,4 @@ const verifyToken = async(req , res  , next)=>{
 
 
 
-
-
-
-
-module.exports = verifyToken ;
+module.exports =  verifyUserToken;
