@@ -122,6 +122,16 @@ const signin = async (req, res, next) => {
 const updateUser = async (req, res ,next)=>{
  try{
 
+
+
+
+  if(req.user.id !== req.params.id){
+
+    throw new errorHandler(
+      "You can only update your profile!"
+    );
+  }
+
   
 
   let newPassword = req.body.password;
