@@ -8,6 +8,8 @@ import {server} from "../server"
 
 const SellerHomePageInfo = ({ isOwner }) => {
   const { seller } = useSelector((state) => state.seller);
+  const { products } = useSelector((state) => state.product);
+
    const dispatch =useDispatch();
    const [data , setData] = useState({}); 
    console.log(data)
@@ -58,14 +60,11 @@ const {id} = useParams();
 
       <div className="px-2">
         <h5 className="font-semibold text-orange-400 text-md">Total Products</h5>
-        <p className="text-sm text-gray-500">10</p>
+        <p className="text-sm text-gray-500">{products && products.length}</p>
       </div>
 
 
-      <div className="px-2">
-        <h5 className="font-semibold text-orange-400 text-md">Ratings</h5>
-        <p className="text-sm text-gray-500">4/5</p>
-      </div>
+     
 
 
 
