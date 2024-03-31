@@ -28,14 +28,6 @@ const SellerHomePageData = ({isOwner}) => {
         <h5 className={` ${active === 1 ? 'text-orange-400 underline ' : 'text-gray-500 '  } font-bold cursor-pointer`}>Shop Products</h5>
     </div>
 
-    <div className='' onClick={()=>setActive(2)}>
-        <h5 className={` ${active === 2 ? 'text-orange-400 underline ' : 'text-gray-500 '  } font-bold cursor-pointer`}>Running Events</h5>
-    </div>
-
-
-    <div className='' onClick={()=>setActive(3)}>
-        <h5 className={` ${active === 3 ? 'text-orange-400 underline ' : 'text-gray-500 '  } font-bold cursor-pointer`}>Shop Reviews</h5>
-    </div>
 
 
 
