@@ -7,7 +7,7 @@ const path = require("path");
 const fs = require("fs");
 
 const createToken = (_id) => {
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "5m" });
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: "3d" });
 };
 
 const signup = async (req, res, next) => {
@@ -78,15 +78,11 @@ const signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-
-
-
     if (!email || !password) {
       throw new errorHandler("All fields must be filled", 400);
     }
 
-    const user = await userSchema.findOne({ email }).select('+password');;
-
+    const user = await userSchema.findOne({ email }).select("+password");
 
     if (!user) {
       throw new errorHandler("No user found. please sign up", 400);
@@ -95,46 +91,29 @@ const signin = async (req, res, next) => {
     // Compare the provided password with the hashed password from the user object
     const validPassowrd = await bcrypt.compare(password, user.password);
 
-
-
     if (!validPassowrd) {
       throw new errorHandler("Invalid password.try again", 400);
     }
-    
 
     const token = createToken(user._id);
 
     return res
-    .status(201)
-    .json({ success: true, message: "sign in successfully", token ,user });
-
-      
-
-      
+      .status(201)
+      .json({ success: true, message: "sign in successfully", token, user });
   } catch (err) {
     return next(err);
   }
 };
 
-
 //update user route
 
-const updateUser = async (req, res ,next)=>{
- try{
+const updateUser = async (req, res, next) => {
+  try {
+    if (req.user.id !== req.params.id) {
+      throw new errorHandler("You can only update your profile!");
+    }
 
-
-
-
-  if(req.user.id !== req.params.id){
-
-    throw new errorHandler(
-      "You can only update your profile!"
-    );
-  }
-
-  
-
-  let newPassword = req.body.password;
+    let newPassword = req.body.password;
 
     // Validate password complexity before hashing
     const passwordRegex = /^(?=.*\d)(?=.*[A-Z])[A-Za-z\d]{6,}$/;
@@ -151,45 +130,92 @@ const updateUser = async (req, res ,next)=>{
       newPassword = await bcrypt.hash(newPassword, salt);
     }
 
+    const userUpdated = await userSchema.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          username: req.body.username,
+          email: req.body.email,
+          password: newPassword,
+          avatar: req.body.avatar,
+          phoneNumber: req.body.phoneNumber,
+        },
+      },
+      { new: true }
+    );
 
+    const { password, ...rest } = userUpdated._doc;
 
+    return res
+      .status(201)
+      .json({ success: true, message: "user updated successfully", rest });
+  } catch (err) {
+    return next(err);
+  }
+};
 
-   const  userUpdated  =  await userSchema.findByIdAndUpdate(req.params.id , {
+//user profile addresses api route
 
-    $set : {
+const updateUserAdresses = async (req, res, next) => {
+  try {
+  
+    const user = await userSchema.findById(req.user._id);
 
-       username : req.body.username,
-       email: req.body.email,
-       password: newPassword,
-       avatar: req.body.avatar,
-       phoneNumber: req.body.phoneNumber,
+    const sameTypeAddress = user.addresses.find(
+      (address) => address.addressType === req.body.addressType
+    );
 
-     
+    if (sameTypeAddress) {
+      throw new errorHandler(`${req.body.addressType} address already exists!`);
     }
-   }, {new : true} )  
 
-   const {password , ...rest} = userUpdated._doc;
+    const existsAddress = user.addresses.find(
+      (address) => address._id === req.body._id
+    );
 
-   return res
-    .status(201)
-    .json({ success: true, message: "user updated successfully", rest});
+    if (existsAddress) {
+      Object.assign(existsAddress, req.body);
+    } else {
+      user.addresses.push(req.body);
+    }
 
-   
- }catch(err){
+    await user.save();
+    return res
+      .status(201)
+      .json({ success: true, message: "Address updated successfully", user });
+  } catch (err) {
+    return next(err);
+  }
+};
 
-   return next(err);
- }
-    
+//delete user profile addresses api route
 
+const deleteUserAdresses = async (req, res, next) => {
+  try {
+    const userId = req.user.id;
+    const addressId = req.params.id;
 
+    await userSchema.updateOne(
+      {
+        _id: userId,
+      },
+      { $pull: { addresses: { _id: addressId } } } // to delete the address from the addresses array
+    );
 
-   
-}
+    const user = await userSchema.findById(userId);
+
+    return res
+      .status(201)
+      .json({ success: true, message: "Address deleted successfully", user });
+  } catch {
+    return next(err);
+  }
+};
 
 module.exports = {
   signup,
   signin,
-  updateUser
-  
-
+  updateUser,
+  updateUserAdresses,
+  deleteUserAdresses,
 };

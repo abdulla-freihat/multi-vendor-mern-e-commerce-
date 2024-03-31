@@ -36,7 +36,18 @@ const userSlice = createSlice({
              updateUser:(state , action)=>{
 
                 state.currentUser=action.payload;
-             }
+             },
+
+             updateUserAddresses:(state , action)=>{
+
+                state.currentUser = action.payload;
+             },
+             deleteUserAddresses:(state , action)=>{
+
+               state.currentUser = action.payload;
+            }
+
+
              
      }
 
@@ -47,7 +58,7 @@ const userSlice = createSlice({
 
 
 export const { signInStart, 
-    signIn,logout , updateUser
+    signIn,logout , updateUser , updateUserAddresses ,  deleteUserAddresses
   
   } = userSlice.actions;
   export default userSlice.reducer;
